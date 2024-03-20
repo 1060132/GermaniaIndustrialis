@@ -20,7 +20,7 @@
     </header>
     <div class="content">
         <div class="map">
-            <canvas id="map" width="1200" height="850" class="map-img"></canvas>
+            <canvas id="map" width="1400" height="850" class="map-img"></canvas>
         </div>
         <div class="data">
             <div class="objects-first">
@@ -51,37 +51,39 @@
             </div>
         </div>  
         <div class="arbeitsbedingungen-window" id ="popup-window">
-            <div class="video"><iframe width="560" height="315" src="https://www.youtube.com/embed/hCyacZNtm5k?si=n9rJ6u_T6P4mVwtW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
             <p class="working-conditions">Das Leben als Arbeiter in der Zeit der Industriellen Revolution war kein Zuckerschlecken, oft musste man sich als Kind für einen Beruf entscheiden, dieser war meist körperlich Anstrengend, und hat die Lebensqualität erheblich verschlechtert. Für einen Hungerlohn sind die Menschen bis zu 16 Stunden am Tag arbeiten gegangen. In der heutigen Zeit unvorstellbar!</p>
             <button class="done" id="done" onclick="closeArbeitsbedingungen()">Fertig?</button>
         </div>
 
         <div class="dreikaiserjahr-window" id="dreikaiserjahr-window">
-            <div class="video"><iframe width="560" height="315" src="https://www.youtube.com/embed/Sh6n4OxgUFk?si=rxb6-DtUxoNxm19l" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
             <button class="done" onclick="closeDreikaiserjahr()">Fertig?</button>
         </div>
         <div class="wrapper">
             <div id="progress">
-                <div id="bar">1%</div>
-        </div>
+                <div id="bar">01.1891</div>
+            </div>
     </div>
 </body>
 
 <script>
-
-    let video_watched = false;
+    var i = 0;
+    let coordinates = [
+        [7,9,2,5,1],
+        [2,7,12,3,5]
+    ];
+    var housing_count = 5;
     var canvas = document.getElementById("map");
     var context = canvas.getContext("2d");
 
+
     var background = new Image();
-    background.src = "./1895.jpg";
+    background.src = "./Verlaufskarte_Ruhr2.png";
 
     var map_width = canvas.width / 9;
     var map_height = canvas.height / 15;
-    
+
     background.onload = function(){
     context.drawImage(background, 0, 0, canvas.width, canvas.height);
-
 
     function placeObject(x, y, object){
         var posX = x * map_width;
@@ -97,8 +99,25 @@
             context.drawImage(object_img, posX, posY, object_width, object_height);
         }
     }
-    placeObject(0, 0, "./icons8-zuhause-50.png");
-}
+    for(let i = 0; i < housing_count; i++){
+        let x = coordinates[0][i];
+        let y = coordinates[1][i];
+        placeObject(x,y, "./icons8-zuhause-50.png")
+    }
+    window.addEventListener('DOMContentLoaded', (event) => {
+    var canvas = document.getElementById('meinCanvas');
+    var context = canvas.getContext('2d');
+    
+    function setCanvasSize() {
+        var container = canvas.parentNode;
+        canvas.width = container.offsetWidth;
+        canvas.height = container.offsetHeight;
+        
+    }
+    setCanvasSize();
+
+    window.addEventListener('resize', setCanvasSize);
+});}
 
 function showPopup(id, given_class){
         var popup = document.getElementById(id);
@@ -132,38 +151,32 @@ function showPopup(id, given_class){
         hidePopup("popup-window")
     }
     var i = 0;
+
     function move() {
-        if (i == 0) {
-            i = 1;
-            var elem = document.getElementById("bar");
-            var width = 1;
-            var id = setInterval(frame, 1000);
-            function frame() {
-            if (width >= 100) {
+    if (i == 0) {
+        i = 1;
+        var elem = document.getElementById("bar");
+        var startDate = new Date(1891, 0, 1); 
+        var currentDate = new Date(startDate); 
+        var endDate = new Date(1902, 0, 1); 
+
+        elem.innerHTML = startDate.toLocaleDateString(); 
+
+        var id = setInterval(frame, 1000);
+        
+        function frame() {
+            if (currentDate >= endDate) { 
                 clearInterval(id);
                 i = 0;
             } else {
-                width++;
-                elem.style.width = width + "%";
-                elem.innerHTML = width  + "%";
-            }
+                currentDate.setMonth(currentDate.getMonth() + 1); 
+                var progressPercentage = Math.round((currentDate.getTime() - startDate.getTime()) / (endDate.getTime() - startDate.getTime()) * 100); // Berechne den Fortschritt in Prozent
+                elem.style.width = progressPercentage + "%";
+                elem.innerHTML = currentDate.toLocaleDateString(); 
             }
         }
-        }
-
-    window.addEventListener('DOMContentLoaded', (event) => {
-    var canvas = document.getElementById('meinCanvas');
-    var context = canvas.getContext('2d');
-    
-    function setCanvasSize() {
-        var container = canvas.parentNode;
-        canvas.width = container.offsetWidth;
-        canvas.height = container.offsetHeight;
-        
     }
-    setCanvasSize();
+}
 
-    window.addEventListener('resize', setCanvasSize);
-});
     </script>
 </html>
