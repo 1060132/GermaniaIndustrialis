@@ -60,6 +60,10 @@
             <div class="video"><iframe width="560" height="315" src="https://www.youtube.com/embed/Sh6n4OxgUFk?si=rxb6-DtUxoNxm19l" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
             <button class="done" onclick="closeDreikaiserjahr()">Fertig?</button>
         </div>
+        <div class="wrapper">
+            <div id="progress">
+                <div id="bar">1%</div>
+        </div>
     </div>
 </body>
 
@@ -127,5 +131,39 @@ function showPopup(id, given_class){
     function closeArbeitsbedingungen(){
         hidePopup("popup-window")
     }
+    var i = 0;
+    function move() {
+        if (i == 0) {
+            i = 1;
+            var elem = document.getElementById("bar");
+            var width = 1;
+            var id = setInterval(frame, 1000);
+            function frame() {
+            if (width >= 100) {
+                clearInterval(id);
+                i = 0;
+            } else {
+                width++;
+                elem.style.width = width + "%";
+                elem.innerHTML = width  + "%";
+            }
+            }
+        }
+        }
+
+    window.addEventListener('DOMContentLoaded', (event) => {
+    var canvas = document.getElementById('meinCanvas');
+    var context = canvas.getContext('2d');
+    
+    function setCanvasSize() {
+        var container = canvas.parentNode;
+        canvas.width = container.offsetWidth;
+        canvas.height = container.offsetHeight;
+        
+    }
+    setCanvasSize();
+
+    window.addEventListener('resize', setCanvasSize);
+});
     </script>
 </html>

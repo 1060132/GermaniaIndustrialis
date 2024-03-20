@@ -52,9 +52,12 @@
     color: white;
 }
 
-.map {
-    text-align: center;
+.canvas-container {
+    position: relative;
+    width: 80%;
+    height: 0; 
 }
+
 
 .map-img {
     border-radius: 10px;
@@ -187,4 +190,5 @@
     text-align: center;
     line-height: 30px;
     color: white;
+    font-family:"UnifrakturMaguntia", cursive;
 }
