@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap');
+
+.root {
+    background-image: url("../pexels-pixabay-235985.jpg");
+}
+
+.unifrakturmaguntia-regular {
+    font-family: "UnifrakturMaguntia", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.main-title {
+    font-family: "UnifrakturMaguntia", cursive;
+    font-size: 40px;
+    text-align: center;
+    color: white;
+}
+
+.title {
+    font-family: "UnifrakturMaguntia", cursive;
+    font-size: 30px;
+    text-align: center;
+    color: black;
+    margin: 0;
+    padding-top: 5px;
+}
+
+.epoch-div {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    text-align: center;
+}
+
+.epoch-div ul {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    margin: 0; /* Ändere von margin-bottom zu margin */
+}
+
+.epoch-div li {
+    font-size: 25px;
+    font-family: "UnifrakturMaguntia", cursive;
+    color: white;
+}
+
+.epoch-div a {
+    text-decoration: none;
+    color: white;
+}
+
+.map {
+    text-align: center;
+}
+
+.map-img {
+    border-radius: 10px;
+    max-width: 100%; /* Hinzugefügt, um das Bild responsiv zu machen */
+}
+
+.objects-first,
+.objects-second,
+.objects-third {
+    width: 100%; /* Ändere die Breite auf 100% */
+    max-width: 300px; /* Maximale Breite festlegen */
+    height: auto; /* Höhe automatisch anpassen */
+    background-color: white;
+    margin: 0 auto; /* Zentriere das Element horizontal */
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 20px; /* Füge Abstand zwischen den Elementen hinzu */
+}
+
+.content {
+    text-align: center;
+}
+
+.hl {
+    width: 100%;
+    background-color: black;
+    height: 3px;
+}
+
+.factory {
+    width: 40px;
+    padding: 7px;
+}
+
+.count {
+    font-family: "UnifrakturMaguntia", cursive;
+    font-size: x-large;
+}
+
+.factories {
+    list-style-type: none;
+}
+
+.factories li {
+    text-align: center;
+    font-family: "UnifrakturMaguntia", cursive;
+    font-size: x-large;
+}
+
+.data {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+/* Media Queries für responsives Design */
+
+@media screen and (min-width: 768px) {
+    /* Füge hier zusätzliche CSS-Regeln für größere Bildschirme hinzu */
+    .content {
+        flex-direction: row; /* Ändere die Richtung auf Reihe */
+        align-items: center; /* Zentriere vertikal */
+    }
+    
+    .objects-first,
+    .objects-second,
+    .objects-third {
+        margin: 0 10px; /* Füge horizontalen Abstand zwischen den Elementen hinzu */
+    }
+}
+
+
+
+.arbeitsbedingungen-window{
+    display: none;
+}
+
+.dreikaiserjahr-window{
+    display: none;
+}
+
+.show-popup{
+    width:560px;
+    height: 500px;
+    font-family:"UnifrakturMaguntia", cursive;
+    background-color: white;
+    visibility: visible;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 10px;
+    padding: 8px 0;
+    z-index: 1;
+    position: absolute;
+    top: 50%;
+    left: 30%;
+}
+
+.done{
+    background-color: #555;
+    font-family:"UnifrakturMaguntia", cursive;
+    text-align: center;
+    border-style: solid;
+    border-radius: 1px;
+    text-decoration: none;
+}

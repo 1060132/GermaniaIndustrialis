@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Germania Industrialis</title>
+    <link rel="stylesheet" href="./landing_page.css">
+</head>
+<body class="root">
+    <header>
+        <h1 class="main-title">Germania Industrialis</h1>
+        <div class="epoch-div">
+            <ul>
+                <li><a class="epoch-choser" href="./landing_page.html">1880</a></li>
+                <li><a class="epoch-choser" href="">1895</a></li>
+                <li><a class="epoch-choser" href="./1910.html">1914</a></li>
+            </ul>
+    </div>
+
+    </header>
+    <div class="content">
+        <div class="map">
+            <canvas id="map" width="1200" height="850" class="map-img"></canvas>
+        </div>
+        <div class="data">
+            <div class="objects-first">
+                <h1 class="title">Einwohner</h1>
+                <div class="hl"></div>
+                <img src="./309041_users_group_people_icon.png" class="factory">
+                <p class="count" id="count_inhabitants">72,000</p>
+            </div>
+            <div class="objects-second">
+                <h1 class="title">Fabriken</h1>
+                <div class="hl"></div>
+                <img src="./3671695_factory_icon.png" class="factory">
+                <ul class="factories">
+                    <li>2 * Mine</li>
+                    <li>2 * Näherei</li>
+                    <li>4 * Destille</li>
+                </ul>
+            </div>
+            <div class="objects-third">
+                <h1 class="title">Erze</h1>
+                <div class="hl"></div>
+                <img src="./icons8-stein-64.png" class="factory">
+                <ul class="factories">
+                    <li>56 t Kohle</li>
+                    <li>2 t Eisen</li>
+                    <li>9 t Stahl</li>
+                </ul>
+            </div>
+        </div>  
+        <div class="arbeitsbedingungen-window" id ="popup-window">
+            <div class="video"><iframe width="560" height="315" src="https://www.youtube.com/embed/hCyacZNtm5k?si=n9rJ6u_T6P4mVwtW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+            <p class="working-conditions">Das Leben als Arbeiter in der Zeit der Industriellen Revolution war kein Zuckerschlecken, oft musste man sich als Kind für einen Beruf entscheiden, dieser war meist körperlich Anstrengend, und hat die Lebensqualität erheblich verschlechtert. Für einen Hungerlohn sind die Menschen bis zu 16 Stunden am Tag arbeiten gegangen. In der heutigen Zeit unvorstellbar!</p>
+            <button class="done" id="done" onclick="hidePopup()">Fertig?</button>
+        </div>
+
+        <div class="dreikaiserjahr-window" id="dreikaiserjahr-window">
+            <div class="video"><iframe width="560" height="315" src="https://www.youtube.com/embed/Sh6n4OxgUFk?si=rxb6-DtUxoNxm19l" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+            <button class="done" id="dreikaiserjahr-window" onclick="hidePopup('dreikaiserjahr-window')">Fertig?</button>
+        </div>
+    </div>
+</body>
+
+<script>
+    var canvas = document.getElementById("map");
+    var context = canvas.getContext("2d");
+
+    var background = new Image();
+    background.src = "./1895.jpg";
+
+    var map_width = canvas.width / 9;
+    var map_height = canvas.height / 15;
+    
+    background.onload = function(){
+    context.drawImage(background, 0, 0, canvas.width, canvas.height);
+
+
+    function placeObject(x, y, object){
+        var posX = x * map_width;
+        var posY = y * map_height;
+
+        var object_img = new Image();
+        object_img.src = object;
+
+        object_img.onload = function() {
+            var object_width = 35;
+            var object_height = 35;
+            
+            context.drawImage(object_img, posX, posY, object_width, object_height);
+        }
+    }
+    placeObject(3, 7, "./icons8-zuhause-50.png");
+}
+
+function showPopup(id, given_class){
+        var popup = document.getElementById(id);
+        popup.classList.remove(given_class);
+        popup.classList.toggle("show-popup");
+
+    }
+
+    function hidePopup(id){
+        var popup = document.getElementById(id);
+        popup.classList.remove("show-popup");
+        popup.classList.toggle("dreikaiserjahr-window")
+    }
+
+    function dreikaiserjahr(){
+        let id = "dreikaiserjahr-window";
+        let given_class = "dreikaiserjahr-window"
+        showPopup(id, given_class)
+    }
+</script>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Popup DIV Beispiel mit Schließen-Knopf</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #ffffff; /* Hintergrundfarbe auf weiß setzen */
+    }
+
+    .popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 300px; /* Breite des DIVs */
+        height: 400px; /* Höhe des DIVs */
+        background-color: #ffffff; /* Hintergrundfarbe auf weiß setzen */
+        border: 1px solid #000000; /* Einen schwarzen Rahmen hinzufügen */
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Einen Schatten hinzufügen */
+        z-index: 9999; /* Z-Index auf einen hohen Wert setzen, damit das DIV über allem anderen schwebt */
+        padding: 20px; /* Innenabstand hinzufügen, um den Text vom Rand zu trennen */
+        position: relative; /* Damit der Schließen-Knopf relativ zum Popup positioniert werden kann */
+    }
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Halbtransparente schwarze Farbe für den Overlay */
+        z-index: 9998; /* Z-Index etwas niedriger als das Popup-DIV setzen, damit der Overlay darunter liegt */
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 10px; /* Abstand vom oberen Rand */
+        right: 10px; /* Abstand vom rechten Rand */
+        cursor: pointer; /* Cursor ändern, um anzuzeigen, dass es sich um einen anklickbaren Bereich handelt */
+    }
+</style>
+</head>
+<body>
+    <div class="overlay"></div>
+    <div class="popup">
+        <span class="close-btn" onclick="closePopup()">X</span> <!-- Schließen-Knopf -->
+        <p>Hier steht dein Text.</p>
+    </div>
+
+    <script>
+        function closePopup() {
+            document.querySelector('.popup').style.display = 'none'; // Das Popup-DIV ausblenden, wenn der Schließen-Knopf geklickt wird
+        }
+    </script>
+</body>
+</html>
