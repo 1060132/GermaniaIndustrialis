@@ -1,0 +1,47 @@
+.main-title{
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: xx-large;
+}
+
+body{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.playing-fields{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+}
+
+.first-game{
+    width:37.5%;
+    border-width: 5px;
+    border-color: black;
+    border: solid;
+    height: 520px;
+    margin: 50px;
+    text-align: center;
+}
+
+.second-game{
+    width:37.5%;
+    border-width: 5px;
+    border-color: black;
+    border: solid;
+    height: 500px;
+    margin: 50px;
+    text-align: center;
+}
+
+.third-game{
+    width:37.5%;
+    border-width: 5px;
+    border-color: black;
+    border: solid;
+    height: 500px;
+    margin: 50px;
+    text-align: center;
+}

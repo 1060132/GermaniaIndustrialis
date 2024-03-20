@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="./admin_panel.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+    <h1 class="main-title">Admin Panel für GermaniaIndustrialis</h1>
+    <div class="playing-fields">
+        <div class="first-game">
+            <h2>1880-1891</h2>
+            <canvas id="chart"></canvas>
+        </div>
+        <div class="second-game">
+            <h2>1891-1902</h2>
+        </div>
+        <div class="third-game">
+            <h2>1902-1914</h2>
+        </div>
+    </div>
+</body>
+<script>
+     const ctx = document.getElementById('chart');
+
+new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: ['Fabrik', 'Haus', 'Mine', 'Villa'],
+    datasets: [{
+      label: '# of Votes',
+      data: [3, 19, 3, 2,],
+      borderWidth: 1
+    }]
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
+}); 
+</script>
+
+</html>
