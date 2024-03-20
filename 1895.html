@@ -53,17 +53,19 @@
         <div class="arbeitsbedingungen-window" id ="popup-window">
             <div class="video"><iframe width="560" height="315" src="https://www.youtube.com/embed/hCyacZNtm5k?si=n9rJ6u_T6P4mVwtW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
             <p class="working-conditions">Das Leben als Arbeiter in der Zeit der Industriellen Revolution war kein Zuckerschlecken, oft musste man sich als Kind für einen Beruf entscheiden, dieser war meist körperlich Anstrengend, und hat die Lebensqualität erheblich verschlechtert. Für einen Hungerlohn sind die Menschen bis zu 16 Stunden am Tag arbeiten gegangen. In der heutigen Zeit unvorstellbar!</p>
-            <button class="done" id="done" onclick="hidePopup()">Fertig?</button>
+            <button class="done" id="done" onclick="closeArbeitsbedingungen()">Fertig?</button>
         </div>
 
         <div class="dreikaiserjahr-window" id="dreikaiserjahr-window">
             <div class="video"><iframe width="560" height="315" src="https://www.youtube.com/embed/Sh6n4OxgUFk?si=rxb6-DtUxoNxm19l" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
-            <button class="done" id="dreikaiserjahr-window" onclick="hidePopup('dreikaiserjahr-window')">Fertig?</button>
+            <button class="done" onclick="closeDreikaiserjahr()">Fertig?</button>
         </div>
     </div>
 </body>
 
 <script>
+
+    let video_watched = false;
     var canvas = document.getElementById("map");
     var context = canvas.getContext("2d");
 
@@ -98,6 +100,7 @@ function showPopup(id, given_class){
         var popup = document.getElementById(id);
         popup.classList.remove(given_class);
         popup.classList.toggle("show-popup");
+        console.log(popup.classList);
 
     }
 
@@ -112,5 +115,17 @@ function showPopup(id, given_class){
         let given_class = "dreikaiserjahr-window"
         showPopup(id, given_class)
     }
-</script>
+
+    function closeDreikaiserjahr(){
+        hidePopup("dreikaiserjahr-window");
+    };
+
+    function arbeitsbedingungen(){
+        showPopup("popup-window", "arbeitsbedingungen-window");
+    }
+
+    function closeArbeitsbedingungen(){
+        hidePopup("popup-window")
+    }
+    </script>
 </html>

@@ -136,6 +136,7 @@
     display: none;
 }
 
+
 .show-popup{
     width:560px;
     height: 500px;
@@ -160,4 +161,8 @@
     border-style: solid;
     border-radius: 1px;
     text-decoration: none;
+}
+
+.hohenzollern-window{
+    display: none;
 }
