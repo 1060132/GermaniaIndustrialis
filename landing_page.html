@@ -61,6 +61,11 @@
             <p class="working-conditions">Das Haus Hohenzollern war eine der bedeutesten Dynastien der Deutschen Geschichte, auch in der Zeit der Hochindustrialisierung hatte sie großen Einfluss</p>
             <button class="done" onclick="closeHohenzollern()">Fertig?</button>
         </div>
+        <div class="wrapper">
+        <div id="progress">
+            <div id="bar">1%</div>
+        </div>
+    </div>
 </body>
 <script>
     var canvas = document.getElementById("map");
@@ -134,5 +139,25 @@
     function closeHohenzollern(){
         hidePopup("hohenzollern")
     }
+    var i = 0;
+    function move() {
+        if (i == 0) {
+            i = 1;
+            var elem = document.getElementById("bar");
+            var width = 1;
+            var id = setInterval(frame, 1000);
+            function frame() {
+            if (width >= 100) {
+                clearInterval(id);
+                i = 0;
+            } else {
+                width++;
+                elem.style.width = width + "%";
+                elem.innerHTML = width  + "%";
+            }
+            }
+        }
+        }
+
 </script>
 </html>

@@ -166,3 +166,25 @@
 .hohenzollern-window{
     display: none;
 }
+
+.wrapper {
+    display: flex;
+    justify-content: center; /* Zentriere horizontal */
+    align-items: center; /* Zentriere vertikal */
+    height: 100%; /* Oder die gewünschte Höhe */
+}
+
+#progress {
+    width: 100%;
+    background-color: #ddd;
+    margin-top: 20px;
+}
+
+#bar {
+    width: 1%;
+    height: 30px;
+    background-color: #943e25;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+}
