@@ -102,11 +102,23 @@
             context.drawImage(object_img, posX, posY, object_width, object_height);
         }
     }
-    for(let i = 0; i < housing_count; i++){
-        let x = coordinates[0][i];
-        let y = coordinates[1][i];
-        placeObject(x,y, "./icons8-zuhause-50.png")
-    }
+
+    fetch("./first-page.json")
+    .then(response => response.json())
+    .then(data => {
+        let buildingNames = Object.keys(data);
+        
+        let buildingCount = buildingNames.length;
+
+        for (let i = 0; i < buildingCount; i++) {
+            let currentBuildingName = buildingNames[i]; // Verwende einen anderen Namen für die Variable
+            let building = data[currentBuildingName];
+
+            placeObject(building["x-Coordinate"], building["y-Coordinate"], "./icons8-zuhause-50.png");
+        };
+    });
+
+
     window.addEventListener('DOMContentLoaded', (event) => {
     var canvas = document.getElementById('meinCanvas');
     var context = canvas.getContext('2d');
@@ -190,6 +202,8 @@
         }
     }
 }
+
+
 
 </script>
 </html>
