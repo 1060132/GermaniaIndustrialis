@@ -110,11 +110,20 @@
 
     window.addEventListener('resize', setCanvasSize);
 });
-for(let i = 0; i < housing_count; i++){
-        let x = coordinates[0][i];
-        let y = coordinates[1][i];
-        placeObject(x,y, "./icons8-zuhause-50.png")
-    }
+fetch("./second-page.json")
+    .then(response => response.json())
+    .then(data => {
+        let buildingNames = Object.keys(data);
+        
+        let buildingCount = buildingNames.length;
+
+        for (let i = 0; i < buildingCount; i++) {
+            let currentBuildingName = buildingNames[i]; 
+            let building = data[currentBuildingName];
+
+            placeObject(building["x-Coordinate"], building["y-Coordinate"], "./icons8-zuhause-50.png");
+        };
+    });
 }
 function showPopup(id, given_class){
         var popup = document.getElementById(id);
