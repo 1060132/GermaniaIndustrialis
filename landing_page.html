@@ -69,6 +69,8 @@
     </div>
 </body>
 <script>
+
+    var placeType;
     var i = 0;
     let coordinates = [
         [7,9,2,5,1],
@@ -114,7 +116,22 @@
             let currentBuildingName = buildingNames[i]; 
             let building = data[currentBuildingName];
 
-            placeObject(building["x-Coordinate"], building["y-Coordinate"], "./icons8-zuhause-50.png");
+            let buildingType = building["type"];
+            console.log(buildingType)
+
+            switch(buildingType){
+                case("Haus"): 
+                    placeType = "./icons8-zuhause-50.png";
+                    break;
+                case("Villa"):
+                    placeType = "./icons8-villa-64.png";
+                    break;
+                case("Fabrik"):
+                    placeType = "./3671695_factory_icon.png"
+                    break;
+            }
+
+            placeObject(building["x-Coordinate"], building["y-Coordinate"], placeType);
         };
     });
 

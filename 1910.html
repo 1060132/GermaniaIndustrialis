@@ -110,7 +110,7 @@
 
     window.addEventListener('resize', setCanvasSize);
 });
-fetch("./second-page.json")
+fetch("./third-page.json")
     .then(response => response.json())
     .then(data => {
         let buildingNames = Object.keys(data);
@@ -121,10 +121,24 @@ fetch("./second-page.json")
             let currentBuildingName = buildingNames[i]; 
             let building = data[currentBuildingName];
 
-            placeObject(building["x-Coordinate"], building["y-Coordinate"], "./icons8-zuhause-50.png");
+            let buildingType = building["type"];
+            console.log(buildingType)
+
+            switch(buildingType){
+                case("Haus"): 
+                    placeType = "./icons8-zuhause-50.png";
+                    break;
+                case("Villa"):
+                    placeType = "./icons8-villa-64.png";
+                    break;
+                case("Fabrik"):
+                    placeType = "./3671695_factory_icon.png"
+                    break;
+            }
+
+            placeObject(building["x-Coordinate"], building["y-Coordinate"], placeType);
         };
     });
-}
 function showPopup(id, given_class){
         var popup = document.getElementById(id);
         popup.classList.remove(given_class);
@@ -180,6 +194,6 @@ function showPopup(id, given_class){
         }
     }
 }
-
+    }
 </script>
 </html>

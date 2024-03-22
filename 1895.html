@@ -100,7 +100,7 @@
         }
     }
 
-    fetch("./first-page.json")
+    fetch("./second-page.json")
     .then(response => response.json())
     .then(data => {
         let buildingNames = Object.keys(data);
@@ -111,7 +111,22 @@
             let currentBuildingName = buildingNames[i]; 
             let building = data[currentBuildingName];
 
-            placeObject(building["x-Coordinate"], building["y-Coordinate"], "./icons8-zuhause-50.png");
+            let buildingType = building["type"];
+            console.log(buildingType)
+
+            switch(buildingType){
+                case("Haus"): 
+                    placeType = "./icons8-zuhause-50.png";
+                    break;
+                case("Villa"):
+                    placeType = "./icons8-villa-64.png";
+                    break;
+                case("Fabrik"):
+                    placeType = "./3671695_factory_icon.png"
+                    break;
+            }
+
+            placeObject(building["x-Coordinate"], building["y-Coordinate"], placeType);
         };
     });
     window.addEventListener('DOMContentLoaded', (event) => {

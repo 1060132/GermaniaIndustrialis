@@ -13,6 +13,21 @@
       "x-Coordinate": 3,
       "y-Coordinate": 12,
       "type": "Villa"
+    },
+    "Building4": {
+      "x-Coordinate": 3,
+      "y-Coordinate": 4,
+      "type": "Haus"
+    },
+    "Building5": {
+      "x-Coordinate": 9,
+      "y-Coordinate": 2,
+      "type": "Fabrik"
+    },
+    "Building6": {
+      "x-Coordinate": 6,
+      "y-Coordinate": 11,
+      "type": "Fabrik"
     }
   }
   
