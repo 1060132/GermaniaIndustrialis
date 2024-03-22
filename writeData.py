@@ -21,9 +21,6 @@ def add_building_to_json(json_file_path, x_coordinate, y_coordinate, building_ty
         with open(json_file_path, 'w') as file:
             json.dump(data, file, indent=4)
 
-        print(f'Neues Gebäude "{new_building_name}" wurde erfolgreich hinzugefügt.')
-
-
 
 
 
@@ -40,4 +37,3 @@ def remove_building(json_file_path, x_coordinate, y_coordinate, building_type):
 
         with open(json_file_path, "w") as file:
             json.dump(data, file, indent=4)
-

@@ -14,7 +14,11 @@
     <div class="playing-fields">
         <div class="first-game">
             <h2>1880-1891</h2>
-            <canvas id="chart"></canvas>
+            <div class="buttons">
+              <a id="change-left" onclick="changeGraph(this.id)"><img class="left" src="./invertiertes-dreieck-links.png"></a>
+              <a id="change-right" onclick="changeGraph(this.class)"><img class="right" src="./invertiertes-dreieck-rechts.png"></a>
+              <div class="graph-homes"><canvas id="chart" class="admin-chart"></canvas></div>
+            </div>
         </div>
         <div class="second-game">
             <h2>1891-1902</h2>
@@ -25,14 +29,15 @@
     </div>
 </body>
 <script>
-     const ctx = document.getElementById('chart');
+    let k = 0;
+     const ctx = document.querySelector(".admin-chart").id;
 
 new Chart(ctx, {
   type: 'bar',
   data: {
     labels: ['Fabrik', 'Haus', 'Mine', 'Villa'],
     datasets: [{
-      label: '# of Votes',
+      label: 'Anzahl an Häusern',
       data: [3, 19, 3, 2,],
       borderWidth: 1
     }]
@@ -45,6 +50,8 @@ new Chart(ctx, {
     }
   }
 }); 
+
+
 </script>
 
 </html>

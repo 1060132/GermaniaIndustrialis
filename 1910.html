@@ -64,10 +64,6 @@
     </div>
 </body>
 <script>
-    let coordinates = [
-        [7,9,2,5,1],
-        [2,7,12,3,5]
-    ];
     var housing_count = 5;
     var canvas = document.getElementById("map");
     var context = canvas.getContext("2d");
@@ -187,7 +183,7 @@ function showPopup(id, given_class){
                 i = 0;
             } else {
                 currentDate.setMonth(currentDate.getMonth() + 1); 
-                var progressPercentage = Math.round((currentDate.getTime() - startDate.getTime()) / (endDate.getTime() - startDate.getTime()) * 100); // Berechne den Fortschritt in Prozent
+                var progressPercentage = Math.round((currentDate.getTime() - startDate.getTime()) / (endDate.getTime() - startDate.getTime()) * 100);
                 elem.style.width = progressPercentage + "%";
                 elem.innerHTML = currentDate.toLocaleDateString(); 
             }

@@ -21,7 +21,7 @@ body{
     border-width: 5px;
     border-color: black;
     border: solid;
-    height: 520px;
+    height: 555px;
     margin: 50px;
     text-align: center;
 }
@@ -44,4 +44,13 @@ body{
     height: 500px;
     margin: 50px;
     text-align: center;
+}
+
+
+.right{
+    width: 30px;
+}
+
+.left{
+    width: 30px;
 }
