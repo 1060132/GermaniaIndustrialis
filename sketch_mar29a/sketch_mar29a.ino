@@ -1,3 +1,5 @@
+#include <ArduinoBLE.h>
+
 const int potPin = 34;
 const int clockPin = 13;
 int potValue = 0;
@@ -11,36 +13,56 @@ enum State {
 
 State currentState = WAIT_CLOCK_HIGH;
 
+BLEService bleService("19B10000-E8F2-537E-4F6C-D104768A1214"); // Beispiel-Service UUID
+BLECharacteristic potCharacteristic("19B10001-E8F2-537E-4F6C-D104768A1214", BLERead | BLENotify, 2); // Beispiel-Charakteristik UUID
+
 void setup() {
   Serial.begin(115200);
   pinMode(clockPin, OUTPUT);
   digitalWrite(clockPin, LOW); 
+
+  if (!BLE.begin()) {
+    Serial.println("Starting BLE failed!");
+    while (1);
+  }
+
+  BLE.setLocalName("ESP32"); // Name des Geräts für Bluetooth
+  BLE.setAdvertisedService(bleService); // Service bekannt machen
+  bleService.addCharacteristic(potCharacteristic); // Charakteristik zum Service hinzufügen
+  BLE.addService(bleService); // Service starten
+
+  BLE.advertise(); // Beginne mit dem Ausstrahlen der BLE-Anzeige
+  Serial.println("BLE server started");
 }
 
 void loop() {
-  unsigned long currentMillis = millis();
+  BLEDevice central = BLE.central();
 
-  switch (currentState) {
-    case WAIT_CLOCK_HIGH:
-      if (currentMillis - previousMillis >= interval) {
-        digitalWrite(clockPin, HIGH);
-        previousMillis = currentMillis;
-        currentState = READ_POT_VALUE;
-      }
-      break;
+  if (central) {
+    Serial.print("Connected to central: ");
+    Serial.println(central.address());
 
-    case READ_POT_VALUE:
-      potValue = analogRead(potPin);
-      Serial.println(potValue);
-      if (potValue < (680 * 1.10) && potValue > (680 * 0.90)) {
-        Serial.println("3.3k");
-      } else if (potValue < (2190 * 1.10) && potValue > (2190 * 0.90)) {
-        Serial.println("470");
-      } else if (potValue < (1580 * 1.10) && potValue > (1580 * 0.90)) {
-        Serial.println("1k");
+    while (central.connected()) {
+      unsigned long currentMillis = millis();
+
+      switch (currentState) {
+        case WAIT_CLOCK_HIGH:
+          if (currentMillis - previousMillis >= interval) {
+            digitalWrite(clockPin, HIGH);
+            previousMillis = currentMillis;
+            currentState = READ_POT_VALUE;
+          }
+          break;
+
+        case READ_POT_VALUE:
+          potValue = analogRead(potPin);
+          potCharacteristic.writeValue((uint8_t*)&potValue, sizeof(potValue)); // Daten an die Charakteristik senden
+          currentState = WAIT_CLOCK_HIGH;
+          digitalWrite(clockPin, LOW);
+          break;
       }
-      currentState = WAIT_CLOCK_HIGH;
-      digitalWrite(clockPin, LOW);
-      break;
+    }
+    Serial.print("Disconnected from central: ");
+    Serial.println(central.address());
   }
 }
