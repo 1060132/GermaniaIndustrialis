@@ -154,6 +154,7 @@
                     var progressPercentage = Math.round((currentDate.getTime() - startDate.getTime()) / (endDate.getTime() - startDate.getTime()) * 100); // Berechne den Fortschritt in Prozent
                     elem.style.width = progressPercentage + "%";
                     elem.innerHTML = currentDate.toLocaleDateString(); 
+                    console.log(currentDate.toLocaleDateString())
                 }
             }
         }
