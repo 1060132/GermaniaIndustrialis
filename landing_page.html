@@ -69,16 +69,14 @@
     </div>
 </body>
 <script>
-
+    var startGame;
     var placeType;
     var i = 0;
-    let coordinates = [
-        [7,9,2,5,1],
-        [2,7,12,3,5]
-    ];
-    var housing_count = 5;
+    var housing_count = 0;
     var canvas = document.getElementById("map");
     var context = canvas.getContext("2d");
+    var mine_count = 0;
+    var factory_count = 0;
 
 
     var background = new Image();
@@ -103,65 +101,6 @@
             
             context.drawImage(object_img, posX, posY, object_width, object_height);
         }
-    }
-
-    fetch("./first-page.json")
-    .then(response => response.json())
-    .then(data => {
-        let buildingNames = Object.keys(data);
-        
-        let buildingCount = buildingNames.length;
-
-        for (let i = 0; i < buildingCount; i++) {
-            let currentBuildingName = buildingNames[i]; 
-            let building = data[currentBuildingName];
-
-            let buildingType = building["type"];
-            console.log(buildingType)
-
-            switch(buildingType){
-                case("Haus"): 
-                    placeType = "./icons8-zuhause-50.png";
-                    break;
-                case("Villa"):
-                    placeType = "./icons8-villa-64.png";
-                    break;
-                case("Fabrik"):
-                    placeType = "./3671695_factory_icon.png"
-                    break;
-            }
-
-            placeObject(building["x-Coordinate"], building["y-Coordinate"], placeType);
-        };
-    });
-
-
-    window.addEventListener('DOMContentLoaded', (event) => {
-    var canvas = document.getElementById('meinCanvas');
-    var context = canvas.getContext('2d');
-    
-    function setCanvasSize() {
-        var container = canvas.parentNode;
-        canvas.width = container.offsetWidth;
-        canvas.height = container.offsetHeight;
-        
-    }
-    setCanvasSize();
-
-    window.addEventListener('resize', setCanvasSize);
-});}
-
-
-    function changeCoal(id){
-        document.getElementById(id).innerHTML = 50;
-    }
-
-    function changeIron(id){
-        document.getElementById(id).innerHTML = 50;
-    }
-
-    function changeSteel(id){
-        document.getElementById(id).innerHTML = 50;
     }
 
     function showPopup(id, given_class){
@@ -195,32 +134,108 @@
     }
 
     function move() {
-    if (i == 0) {
-        i = 1;
-        var elem = document.getElementById("bar");
-        var startDate = new Date(1880, 0, 1); 
-        var currentDate = new Date(startDate); 
-        var endDate = new Date(1891, 0, 1); 
+           if (i == 0) {
+            i = 1;
+            var elem = document.getElementById("bar");
+            var startDate = new Date(1880, 0, 1); 
+            var currentDate = new Date(startDate); 
+            var endDate = new Date(1891, 0, 1); 
 
-        elem.innerHTML = startDate.toLocaleDateString(); 
+            elem.innerHTML = startDate.toLocaleDateString(); 
 
-        var id = setInterval(frame, 1000);
-        
-        function frame() {
-            if (currentDate >= endDate) { 
-                clearInterval(id);
-                i = 0;
-            } else {
-                currentDate.setMonth(currentDate.getMonth() + 1); 
-                var progressPercentage = Math.round((currentDate.getTime() - startDate.getTime()) / (endDate.getTime() - startDate.getTime()) * 100); // Berechne den Fortschritt in Prozent
-                elem.style.width = progressPercentage + "%";
-                elem.innerHTML = currentDate.toLocaleDateString(); 
+            var id = setInterval(frame, 6000);
+            
+            function frame() {
+                if (currentDate >= endDate) { 
+                    clearInterval(id);
+                    i = 0;
+                } else {
+                    currentDate.setMonth(currentDate.getMonth() + 1); 
+                    var progressPercentage = Math.round((currentDate.getTime() - startDate.getTime()) / (endDate.getTime() - startDate.getTime()) * 100); // Berechne den Fortschritt in Prozent
+                    elem.style.width = progressPercentage + "%";
+                    elem.innerHTML = currentDate.toLocaleDateString(); 
+                }
             }
         }
-    }
 }
 
 
+
+
+    fetch("./first-page.json")
+    .then(response => response.json())
+    .then(data => {
+        let buildingNames = Object.keys(data);
+        
+        let buildingCount = buildingNames.length;
+        if(buildingCount != 0){
+            move()
+        }
+        else{
+            startGame = false;
+        }
+
+        for (let i = 0; i < buildingCount; i++) {
+            let currentBuildingName = buildingNames[i]; 
+            let building = data[currentBuildingName];
+
+            let buildingType = building["type"];
+            console.log(buildingType)
+
+            switch(buildingType){
+                case("Haus"): 
+                    placeType = "./icons8-zuhause-50.png";
+                    housing_count++;
+                    break;
+                case("Villa"):
+                    placeType = "./icons8-villa-64.png";
+                    break;
+                case("Fabrik"):
+                    placeType = "./3671695_factory_icon.png"
+                    factory_count++;
+                    break;
+                case("Mine"):
+                    placeType = "./mine-icon.png"
+                    mine_count++;
+                    break;
+            }
+
+            placeObject(building["x-Coordinate"], building["y-Coordinate"], placeType);
+        };
+    });
+
+
+    window.addEventListener('DOMContentLoaded', (event) => {
+    var canvas = document.getElementById('meinCanvas');
+    var context = canvas.getContext('2d');
+    
+    function setCanvasSize() {
+        var container = canvas.parentNode;
+        canvas.width = container.offsetWidth;
+        canvas.height = container.offsetHeight;
+        
+    }
+    setCanvasSize();
+
+    window.addEventListener('resize', setCanvasSize);
+});}
+
+
+    function changeCoal(id){
+        document.getElementById(id).innerHTML = mine_count*21600;
+    }
+
+    function changeIron(id){
+        document.getElementById(id).innerHTML = 50;
+    }
+
+    function changeSteel(id){
+        document.getElementById(id).innerHTML = 50;
+    }
+
+    function changeInhabitants(){
+        document.getElementById("count_inhabitants").innerHTML = housing_count*15000;
+    }
 
 </script>
 </html>

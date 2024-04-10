@@ -38,5 +38,10 @@
         "x-Coordinate": 6,
         "y-Coordinate": 11,
         "type": "Fabrik"
+    },
+    "Building9": {
+        "x-Coordinate": 4,
+        "y-Coordinate": 2,
+        "type": "Mine"
     }
 }

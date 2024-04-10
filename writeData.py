@@ -21,7 +21,7 @@ def add_building_to_json(json_file_path, x_coordinate, y_coordinate, building_ty
         with open(json_file_path, 'w') as file:
             json.dump(data, file, indent=4)
 
-
+add_building_to_json("./first-page.json", 4, 2, "Mine")
 
 
 
