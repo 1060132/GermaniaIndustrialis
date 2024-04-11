@@ -155,6 +155,11 @@
                     elem.style.width = progressPercentage + "%";
                     elem.innerHTML = currentDate.toLocaleDateString(); 
                     console.log(currentDate.toLocaleDateString())
+                    switch (currentDate.toLocaleDateString()){
+                         case("1.2.1880"):
+                         showPopup("popup-window", "arbeitsbedingungen-window");
+                         break;
+                         }
                 }
             }
         }
@@ -219,7 +224,7 @@
     setCanvasSize();
 
     window.addEventListener('resize', setCanvasSize);
-});}
+
 
 
     function changeCoal(id){
@@ -237,6 +242,6 @@
     function changeInhabitants(){
         document.getElementById("count_inhabitants").innerHTML = housing_count*15000;
     }
-
+});}
 </script>
 </html>
