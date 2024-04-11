@@ -1,0 +1,15 @@
+{
+    "Building1": {
+        "x-Coordinate": 1,
+        "y-Coordinate": 6,
+        "type": "Haus",
+        "House": 0,
+        "Farm": 0,
+        "Factories": 0
+    },
+    "Building2": {
+        "x-Coordinate": 6,
+        "y-Coordinate": 4,
+        "type": "Haus"
+    }
+}

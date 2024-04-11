@@ -16,6 +16,12 @@ def add_building_to_json(json_file_path, x_coordinate, y_coordinate, building_ty
 
         new_building_name = f'Building{building_index}'
 
+        building_types = {}
+        for building_name, building_info in data.items():
+            building_types[building_name] = building_info["type"]
+        
+        print(building_types)
+
         new_building = {
             "x-Coordinate": x_coordinate,
             "y-Coordinate": y_coordinate,
@@ -23,26 +29,13 @@ def add_building_to_json(json_file_path, x_coordinate, y_coordinate, building_ty
         }
         data[new_building_name] = new_building
 
-        if building_type == "Haus":
-             housing_count+=1
-        elif building_type == "Farm":
-             farm_count+=1
-        elif building_type == "Fabrik":
-             factory_count+=1
-        
-        counter = {
-             "House": housing_count,
-             "Farm": farm_count,
-             "Factories": factory_count
-        }
-        data["count"] = counter
+
         with open(json_file_path, 'w') as file:
             json.dump(data, file, indent=4)
 
 
 
-add_building_to_json("./first-page.json", 1, 6, "Haus")
-
+add_building_to_json("./first-page.json", 6, 4, "Haus")
 
 
 def remove_building(json_file_path, x_coordinate, y_coordinate, building_type):
