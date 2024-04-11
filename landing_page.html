@@ -1,83 +1,108 @@
 <!DOCTYPE html>
 <html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Germania Industrialis</title>
-    <link rel="stylesheet" href="./landing_page.css">
-</head>
-<body class="root">
+    <link rel="stylesheet" href="./landing_page.css" />
+  </head>
+  <body class="root">
     <header>
-        <h1 class="main-title">Germania Industrialis</h1>
-        <div class="epoch-div">
-            <ul>
-                <li><a class="epoch-choser" href="#">1880</a></li>
-                <li><a class="epoch-choser" href="./1895.html">1895</a></li>
-                <li><a class="epoch-choser" href="./1910.html">1914</a></li>
-            </ul>
-    </div>
+      <h1 class="main-title">Germania Industrialis</h1>
+      <div class="epoch-div">
+        <ul>
+          <li><a class="epoch-choser" href="#">1880</a></li>
+          <li><a class="epoch-choser" href="./1895.html">1895</a></li>
+          <li><a class="epoch-choser" href="./1910.html">1914</a></li>
+        </ul>
+      </div>
     </header>
     <div class="content">
-        <div class="map">
-            <canvas id="map" width="1400" height="850" class="map-img"></canvas>
+      <div class="map">
+        <canvas id="map" width="1400" height="850" class="map-img"></canvas>
+      </div>
+      <div class="data">
+        <div class="objects-first">
+          <h1 class="title">Einwohner</h1>
+          <div class="hl"></div>
+          <img src="./309041_users_group_people_icon.png" class="factory" />
+          <p class="count" id="count_inhabitants">1</p>
         </div>
-        <div class="data">
-            <div class="objects-first">
-                <h1 class="title">Einwohner</h1>
-                <div class="hl"></div>
-                <img src="./309041_users_group_people_icon.png" class="factory">
-                <p class="count" id="count_inhabitants">72,000</p>
-            </div>
-            <div class="objects-second">
-                <h1 class="title">Fabriken</h1>
-                <div class="hl"></div>
-                <img src="./3671695_factory_icon.png" class="factory">
-                <ul class="factories">
-                    <li>2 * Mine</li>
-                    <li>2 * Näherei</li>
-                    <li>4 * Destille</li>
-                </ul>
-            </div>
-            <div class="objects-third">
-                <h1 class="title">Erze</h1>
-                <div class="hl"></div>
-                <img src="./icons8-stein-64.png" class="factory">
-                <ul class="factories">
-                    <li><a id="coal-value" onclick="changeCoal(this.id)">16</a> t Kohle</li>
-                    <li><a id="iron-value" onclick="changeIron(this.id)">2</a> t Eisen</li>
-                    <li><a id="steel-value" onclick="changeIron(this.id)">9</a> t Stahl</li>
-                </ul>
-            </div>
-        </div>  
+        <div class="objects-second">
+          <h1 class="title">Gebäude</h1>
+          <div class="hl"></div>
+          <ul>
+            <li>
+                <p id = housing></p>
+            </li>
+            <li>
+                <p id="factories" ></p>
+            </li>
+            <li>
+                <p id="farm"></p>
+            </li>
+          </ul>
+          <img src="./3671695_factory_icon.png" class="factory" />
+          <ul class="factories">
+          </ul>
+        </div>
+        <div class="objects-third">
+          <h1 class="title">Erze</h1>
+          <div class="hl"></div>
+          <img src="./icons8-stein-64.png" class="factory" />
+          <ul class="factories">
+            <li>
+              <a id="coal-value" onclick="changeCoal(this.id)">16</a> t Kohle
+            </li>
+            <li>
+              <a id="iron-value" onclick="changeIron(this.id)">2</a> t Eisen
+            </li>
+            <li>
+              <a id="steel-value" onclick="changeIron(this.id)">9</a> t Stahl
+            </li>
+          </ul>
+        </div>
+      </div>
 
-        <div class="arbeitsbedingungen-window" id ="popup-window">
-    
-            <p class="working-conditions">Das Leben als Arbeiter in der Zeit der Industriellen Revolution war kein Zuckerschlecken, oft musste man sich als Kind für einen Beruf entscheiden, dieser war meist körperlich Anstrengend, und hat die Lebensqualität erheblich verschlechtert. Für einen Hungerlohn sind die Menschen bis zu 16 Stunden am Tag arbeiten gegangen. In der heutigen Zeit unvorstellbar!</p>
-            <button class="done"  onclick="closeArbeitsbedingungen()">Fertig?</button>
-        </div>
+      <div class="arbeitsbedingungen-window" id="popup-window">
+        <img
+          src="./Industrialisierung_1868-580.jpg"
+          class="arbeitsbedingungen-foto"
+        />
+        <p class="working-conditions">
+          Das Leben als Arbeiter in der Zeit der Industriellen Revolution war
+          kein Zuckerschlecken, oft musste man sich als Kind für einen Beruf
+          entscheiden, dieser war meist körperlich Anstrengend, und hat die
+          Lebensqualität erheblich verschlechtert. Für einen Hungerlohn sind die
+          Menschen bis zu 16 Stunden am Tag arbeiten gegangen. In der heutigen
+          Zeit unvorstellbar!
+        </p>
+      </div>
 
-        <div class="hohenzollern-window" id="hohenzollern">
-            <p class="working-conditions">Das Haus Hohenzollern war eine der bedeutesten Dynastien der Deutschen Geschichte, auch in der Zeit der Hochindustrialisierung hatte sie großen Einfluss</p>
-            <button class="done" onclick="closeHohenzollern()">Fertig?</button>
+      <div class="hohenzollern-window" id="hohenzollern">
+        <p class="working-conditions">
+          Das Haus Hohenzollern war eine der bedeutesten Dynastien der Deutschen
+          Geschichte, auch in der Zeit der Hochindustrialisierung hatte sie
+          großen Einfluss
+        </p>
+      </div>
+      <div class="wrapper">
+        <div id="progress">
+          <div id="bar">01.1880</div>
         </div>
-        <div class="wrapper">
-            <div id="progress">
-                <div id="bar">01.1880</div>
-            </div>
-        </div>
-        
+      </div>
     </div>
-</body>
-<script>
+  </body>
+  <script>
     var startGame;
     var placeType;
     var i = 0;
     var housing_count = 0;
     var canvas = document.getElementById("map");
     var context = canvas.getContext("2d");
-    var mine_count = 0;
+    var farm_count = 0;
     var factory_count = 0;
-
+    var click_count = 0;
 
     var background = new Image();
     background.src = "./Verlaufskarte_Ruhr2.png";
@@ -85,163 +110,175 @@
     var map_width = canvas.width / 9;
     var map_height = canvas.height / 15;
 
-    background.onload = function(){
-    context.drawImage(background, 0, 0, canvas.width, canvas.height);
+    background.onload = function () {
+      context.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-    function placeObject(x, y, object){
+      function Sleep(milliseconds) {
+        return new Promise((resolve) => setTimeout(resolve, milliseconds));
+      }
+
+      function placeObject(x, y, object) {
         var posX = x * map_width;
         var posY = y * map_height;
 
         var object_img = new Image();
         object_img.src = object;
 
-        object_img.onload = function() {
-            var object_width = 35;
-            var object_height = 35;
-            
-            context.drawImage(object_img, posX, posY, object_width, object_height);
-        }
-    }
+        object_img.onload = function () {
+          var object_width = 35;
+          var object_height = 35;
 
-    function showPopup(id, given_class){
+          context.drawImage(
+            object_img,
+            posX,
+            posY,
+            object_width,
+            object_height
+          );
+        };
+      }
+
+      async function showPopup(id, given_class) {
         var popup = document.getElementById(id);
         popup.classList.remove(given_class);
         popup.classList.toggle("show-popup");
         console.log(popup.classList);
+        await Sleep(1800);
+        popup.classList.remove("show-popup");
+        popup.classList.toggle(given_class);
+      }
 
-    }
-
-    function hidePopup(id){
+      function hidePopup(id) {
         var popup = document.getElementById(id);
         popup.classList.remove("show-popup");
-        popup.classList.toggle("dreikaiserjahr-window")
-    }
+        popup.classList.toggle("dreikaiserjahr-window");
+      }
 
-    function closeArbeitsbedingungen(){
-        hidePopup("popup-window")
-    }
+      function closeArbeitsbedingungen() {
+        hidePopup("popup-window");
+      }
 
-    function arbeitsbedingungen(){
+      function arbeitsbedingungen() {
         showPopup("popup-window", "arbeitsbedingungen-window");
-    }
+      }
 
-    function hohenzollern(){
-        showPopup("hohenzollern","hohenzollern-window")
-    }
+      function hohenzollern() {
+        showPopup("hohenzollern", "hohenzollern-window");
+      }
 
-    function closeHohenzollern(){
-        hidePopup("hohenzollern")
-    }
+      function closeHohenzollern() {
+        hidePopup("hohenzollern");
+      }
 
-    function move() {
-           if (i == 0) {
-            i = 1;
-            var elem = document.getElementById("bar");
-            var startDate = new Date(1880, 0, 1); 
-            var currentDate = new Date(startDate); 
-            var endDate = new Date(1891, 0, 1); 
+      function move() {
+        if (i == 0) {
+          i = 1;
+          var elem = document.getElementById("bar");
+          var startDate = new Date(1880, 0, 1);
+          var currentDate = new Date(startDate);
+          var endDate = new Date(1891, 0, 1);
 
-            elem.innerHTML = startDate.toLocaleDateString(); 
+          elem.innerHTML = startDate.toLocaleDateString();
 
-            var id = setInterval(frame, 6000);
-            
-            function frame() {
-                if (currentDate >= endDate) { 
-                    clearInterval(id);
-                    i = 0;
-                } else {
-                    currentDate.setMonth(currentDate.getMonth() + 1); 
-                    var progressPercentage = Math.round((currentDate.getTime() - startDate.getTime()) / (endDate.getTime() - startDate.getTime()) * 100); // Berechne den Fortschritt in Prozent
-                    elem.style.width = progressPercentage + "%";
-                    elem.innerHTML = currentDate.toLocaleDateString(); 
-                    console.log(currentDate.toLocaleDateString())
-                    switch (currentDate.toLocaleDateString()){
-                         case("1.2.1880"):
-                         showPopup("popup-window", "arbeitsbedingungen-window");
-                         break;
-                         }
-                }
+          var id = setInterval(frame, 6000);
+
+          function frame() {
+            if (currentDate >= endDate) {
+              clearInterval(id);
+              i = 0;
+            } else {
+              currentDate.setMonth(currentDate.getMonth() + 1);
+              var progressPercentage = Math.round(
+                ((currentDate.getTime() - startDate.getTime()) /
+                  (endDate.getTime() - startDate.getTime())) *
+                  100
+              ); // Berechne den Fortschritt in Prozent
+              elem.style.width = progressPercentage + "%";
+              elem.innerHTML = currentDate.toLocaleDateString();
+              console.log(currentDate.toLocaleDateString());
+              switch (currentDate.toLocaleDateString()) {
+                case "1.2.1880":
+                  showPopup("popup-window", "arbeitsbedingungen-window");
+                  break;
+                case "1.5.1880":
+                    showPopup("hohenzollern" , "hohenzollern-window")
+              }
             }
+          }
         }
-}
+      }
 
+      fetch("./first-page.json")
+        .then((response) => response.json())
+        .then((data) => {
+          let buildingNames = Object.keys(data);
 
-
-
-    fetch("./first-page.json")
-    .then(response => response.json())
-    .then(data => {
-        let buildingNames = Object.keys(data);
-        
-        let buildingCount = buildingNames.length;
-        if(buildingCount != 0){
-            move()
-        }
-        else{
+          let buildingCount = buildingNames.length;
+          if (buildingCount != 0) {
+            move();
+          } else {
             startGame = false;
-        }
+          }
 
-        for (let i = 0; i < buildingCount; i++) {
-            let currentBuildingName = buildingNames[i]; 
+          for (let i = 0; i < buildingCount; i++) {
+            let currentBuildingName = buildingNames[i];
             let building = data[currentBuildingName];
 
             let buildingType = building["type"];
-            console.log(buildingType)
+            console.log(buildingType);
 
-            switch(buildingType){
-                case("Haus"): 
-                    placeType = "./icons8-zuhause-50.png";
-                    housing_count++;
-                    break;
-                case("Villa"):
-                    placeType = "./icons8-villa-64.png";
-                    break;
-                case("Fabrik"):
-                    placeType = "./3671695_factory_icon.png"
-                    factory_count++;
-                    break;
-                case("Mine"):
-                    placeType = "./mine-icon.png"
-                    mine_count++;
-                    break;
+            switch (buildingType) {
+              case "Haus":
+                placeType = "./icons8-zuhause-50.png";
+                document.getElementById("count_inhabitants").innerHTML = housing_count * 15000;
+                break;
+              case "Fabrik":
+                placeType = "./3671695_factory_icon.png";
+                document.getElementById("")
+                break;
+              case "Farm":
+                placeType = "./icons8-bauernhof-100.png";
+                break;
             }
 
-            placeObject(building["x-Coordinate"], building["y-Coordinate"], placeType);
-        };
-    });
+            placeObject(
+              building["x-Coordinate"],
+              building["y-Coordinate"],
+              placeType
+            );
+          }
+        });
 
+      window.addEventListener("DOMContentLoaded", (event) => {
+        var canvas = document.getElementById("meinCanvas");
+        var context = canvas.getContext("2d");
 
-    window.addEventListener('DOMContentLoaded', (event) => {
-    var canvas = document.getElementById('meinCanvas');
-    var context = canvas.getContext('2d');
-    
-    function setCanvasSize() {
-        var container = canvas.parentNode;
-        canvas.width = container.offsetWidth;
-        canvas.height = container.offsetHeight;
-        
-    }
-    setCanvasSize();
+        function setCanvasSize() {
+          var container = canvas.parentNode;
+          canvas.width = container.offsetWidth;
+          canvas.height = container.offsetHeight;
+        }
+        setCanvasSize();
 
-    window.addEventListener('resize', setCanvasSize);
+        window.addEventListener("resize", setCanvasSize);
+      });
 
+      function changeCoal(id) {
+        document.getElementById(id).innerHTML = mine_count * 21600;
+      }
 
-
-    function changeCoal(id){
-        document.getElementById(id).innerHTML = mine_count*21600;
-    }
-
-    function changeIron(id){
+      function changeIron(id) {
         document.getElementById(id).innerHTML = 50;
-    }
+      }
 
-    function changeSteel(id){
+      function changeSteel(id) {
         document.getElementById(id).innerHTML = 50;
-    }
+      }
 
-    function changeInhabitants(){
-        document.getElementById("count_inhabitants").innerHTML = housing_count*15000;
-    }
-});}
-</script>
+      function changeInhabitants() {
+        document.getElementById("count_inhabitants").innerHTML =
+          housing_count * 15000;
+      }
+    };
+  </script>
 </html>
