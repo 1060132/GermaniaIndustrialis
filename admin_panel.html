@@ -16,8 +16,8 @@
             <h2>1880-1891</h2>
             <div class="buttons">
               <a id="change-left" onclick="changeGraph(this.id)"><img class="left" src="./invertiertes-dreieck-links.png"></a>
-              <a id="change-right" onclick="changeGraph(this.class)"><img class="right" src="./invertiertes-dreieck-rechts.png"></a>
-              <div class="graph-homes"><canvas id="chart" class="admin-chart"></canvas></div>
+              <a id="change-right" onclick="changeGraph(this.i)"><img class="right" src="./invertiertes-dreieck-rechts.png"></a>
+              <div class="shown"><canvas id="chart" class="admin-chart"></canvas></div>
             </div>
         </div>
         <div class="second-game">
@@ -50,6 +50,10 @@ new Chart(ctx, {
     }
   }
 }); 
+
+  function changeGraph(id){
+    document.getElementById(id)
+  }
 
 
 </script>
