@@ -26,12 +26,13 @@
           <h1 class="title">Einwohner</h1>
           <div class="hl"></div>
           <img src="./309041_users_group_people_icon.png" class="factory" />
-          <p class="count" id="count_inhabitants">1</p>
+          <p class="count" id="count_inhabitants"></p>
         </div>
         <div class="objects-second">
           <h1 class="title">Gebäude</h1>
           <div class="hl"></div>
-          <ul>
+          <img src="./3671695_factory_icon.png" class="factory" />
+          <ul class="factories">
             <li>
                 <p id = housing></p>
             </li>
@@ -41,8 +42,10 @@
             <li>
                 <p id="farm"></p>
             </li>
+            <li>
+              <p id="zeche"></p>
+            </li>
           </ul>
-          <img src="./3671695_factory_icon.png" class="factory" />
           <ul class="factories">
           </ul>
         </div>
@@ -52,13 +55,13 @@
           <img src="./icons8-stein-64.png" class="factory" />
           <ul class="factories">
             <li>
-              <a id="coal-value" onclick="changeCoal(this.id)">16</a> t Kohle
+              <a id="coal-value" onclick="changeCoal(this.id)"></a> t Kohle
             </li>
             <li>
-              <a id="iron-value" onclick="changeIron(this.id)">2</a> t Eisen
+              <a id="iron-value" onclick="changeIron(this.id)"></a> t Eisen
             </li>
             <li>
-              <a id="steel-value" onclick="changeIron(this.id)">9</a> t Stahl
+              <a id="steel-value" onclick="changeIron(this.id)"></a> t Stahl
             </li>
           </ul>
         </div>
@@ -102,7 +105,7 @@
     var context = canvas.getContext("2d");
     var farm_count = 0;
     var factory_count = 0;
-    var click_count = 0;
+    var zeche_count = 0;
 
     var background = new Image();
     background.src = "./Verlaufskarte_Ruhr2.png";
@@ -208,6 +211,21 @@
         }
       }
 
+      function changeCoal() {
+        document.getElementById("coal-value").innerHTML = zeche_count * 21600;
+      }
+
+      function changeIron() {
+        document.getElementById("steel-value").innerHTML =  factory_count * 90000;
+      }
+
+
+      function changeInhabitants() {
+        console.log(housing_count)
+        document.getElementById("count_inhabitants").innerHTML =
+          housing_count * 15000;
+      }
+
       fetch("./first-page.json")
         .then((response) => response.json())
         .then((data) => {
@@ -239,6 +257,9 @@
               case "Farm":
                 placeType = "./icons8-bauernhof-100.png";
                 break;
+              case "Zeche":
+                placeType = "./icons8-zeche-zollverein-80.png";
+                break;
             }
 
             placeObject(
@@ -247,6 +268,28 @@
               placeType
             );
           }
+          if(data.counter !== undefined){
+          housing_count =  data.counter.Haeuser;
+          factory_count = data.counter.Fabriken;
+          farm_count = data.counter.Farmen
+          zeche_count = data.counter.Zechen
+          console.log(housing_count, factory_count, farm_count)
+          changeInhabitants()
+          changeCoal()
+          changeIron()
+
+          document.getElementById("housing").innerHTML = 
+          (housing_count >= 1 ? housing_count + " Haus" : housing_count + " Häuser");
+          document.getElementById("factories").innerHTML = 
+          (factory_count >= 1 ? zeche_count + " Firma": housing_count + " Firmen")
+          document.getElementById("farm").innerHTML = 
+          (farm_count >= 1 ? housing_count + " Bauernhof": housing_count + " Bauernhöfe")
+          document.getElementById("zeche").innerHTML = 
+          (zeche_count >= 1 ? zeche_count + " Firma": housing_count + " Firmen")
+
+
+        }
+
         });
 
       window.addEventListener("DOMContentLoaded", (event) => {
@@ -263,22 +306,6 @@
         window.addEventListener("resize", setCanvasSize);
       });
 
-      function changeCoal(id) {
-        document.getElementById(id).innerHTML = mine_count * 21600;
-      }
-
-      function changeIron(id) {
-        document.getElementById(id).innerHTML = 50;
-      }
-
-      function changeSteel(id) {
-        document.getElementById(id).innerHTML = 50;
-      }
-
-      function changeInhabitants() {
-        document.getElementById("count_inhabitants").innerHTML =
-          housing_count * 15000;
-      }
     };
   </script>
 </html>
