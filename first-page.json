@@ -5,10 +5,10 @@
         "type": "Haus"
     },
     "counter": {
-        "Haeuser": 2,
-        "Fabriken": 2,
-        "Farmen": 2,
-        "Zechen": 2
+        "Haeuser": 1,
+        "Fabriken": 1,
+        "Farmen": 1,
+        "Zechen": 1
     },
     "Building2": {
         "x-Coordinate": 2,
@@ -21,26 +21,6 @@
         "type": "Farm"
     },
     "Building4": {
-        "x-Coordinate": 7,
-        "y-Coordinate": 4,
-        "type": "Fabrik"
-    },
-    "Building5": {
-        "x-Coordinate": 6,
-        "y-Coordinate": 8,
-        "type": "Haus"
-    },
-    "Building6": {
-        "x-Coordinate": 2,
-        "y-Coordinate": 5,
-        "type": "Zeche"
-    },
-    "Building7": {
-        "x-Coordinate": 1,
-        "y-Coordinate": 3,
-        "type": "Farm"
-    },
-    "Building8": {
         "x-Coordinate": 7,
         "y-Coordinate": 4,
         "type": "Fabrik"
