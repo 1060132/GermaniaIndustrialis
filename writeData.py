@@ -4,6 +4,7 @@ housing_count  = 0
 farm_count = 0
 factory_count = 0
 zechen_count = 0
+
 '''
 command = ["python3", "-m", "serial.tools.miniterm", "/dev/ttyUSB0", "115200"]
 print(command)
@@ -37,7 +38,6 @@ def add_building_to_json(json_file_path, x_coordinate, y_coordinate, building_ty
         }
     else:
         counts = data["counter"]
-
     if building_type == "Fabrik":
         counts["Fabriken"] += 1
     elif building_type == "Haus":
@@ -72,7 +72,7 @@ def add_building_to_json(json_file_path, x_coordinate, y_coordinate, building_ty
 def remove_building(json_file_path, x_coordinate, y_coordinate, building_type):
     with open(json_file_path, "r+") as file:
         data = json.load(file)
-        counts = data.get("counter", {"Haeuser": 0, "Fabriken": 0, "Farmen": 0})
+        counts = data.get("counter", {"Haeuser": 0, "Fabriken": 0, "Farmen": 0, "Zechen": 0})
 
         to_remove = []
         for building_name, building_data in data.items():
@@ -101,7 +101,6 @@ def remove_building(json_file_path, x_coordinate, y_coordinate, building_type):
         file.truncate()
 
 
-add_building_to_json("./first-page.json", 6, 8, "Haus")
-add_building_to_json("./first-page.json", 2, 5, "Zeche")
-add_building_to_json("./first-page.json", 1, 3, "Farm")
-add_building_to_json("./first-page.json", 7, 4, "Fabrik")
+add_building_to_json("./first-page.json", 3, 4, "Farm")
+add_building_to_json("./first-page.json", 3, 4, "Haus")
+add_building_to_json("./first-page.json", 3, 4, "Haus")

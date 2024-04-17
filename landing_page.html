@@ -55,10 +55,10 @@
           <img src="./icons8-stein-64.png" class="factory" />
           <ul class="factories">
             <li>
-              <a id="coal-value" onclick="changeCoal(this.id)"></a> t Kohle
+              <a id="coal-value"></a>
             </li>
             <li>
-              <a id="steel-value" onclick="changeIron(this.id)"></a> t Stahl
+              <a id="steel-value"></a>
             </li>
           </ul>
         </div>
@@ -209,18 +209,18 @@
       }
 
       function changeCoal() {
-        document.getElementById("coal-value").innerHTML = zeche_count * 21600;
+        document.getElementById("coal-value").innerHTML = zeche_count > 0 ? (zeche_count * 21600 + " t Kohle"): " ";
       }
 
       function changeIron() {
-        document.getElementById("steel-value").innerHTML =  factory_count * 90000;
+        document.getElementById("steel-value").innerHTML =  factory_count > 0 ? (factory_count * 2000 + " t Stahl"): " ";
       }
 
 
       function changeInhabitants() {
         console.log(housing_count)
-        document.getElementById("count_inhabitants").innerHTML =
-          housing_count * 15000;
+        document.getElementById("count_inhabitants").innerHTML = 
+        (housing_count == 0 ? " ": housing_count* 15000 + " Einwohner ");
       }
 
       fetch("./first-page.json")
@@ -229,8 +229,7 @@
           let buildingNames = Object.keys(data);
 
           let buildingCount = buildingNames.length;
-          if (buildingCount != 0) {
-            move();
+          if (buildingCount == 0) {;
           } else {
             startGame = false;
           }
@@ -245,11 +244,9 @@
             switch (buildingType) {
               case "Haus":
                 placeType = "./icons8-zuhause-50.png";
-                document.getElementById("count_inhabitants").innerHTML = housing_count * 15000;
                 break;
               case "Fabrik":
                 placeType = "./3671695_factory_icon.png";
-                document.getElementById("")
                 break;
               case "Farm":
                 placeType = "./icons8-bauernhof-100.png";
@@ -282,7 +279,7 @@
           document.getElementById("farm").innerHTML = 
           (farm_count >= 1 ? housing_count + " Bauernhof": housing_count + " Bauernhöfe")
           document.getElementById("zeche").innerHTML = 
-          (zeche_count >= 1 ? zeche_count + " Firma": housing_count + " Firmen")
+          (zeche_count >= 1 ? zeche_count + " Zeche": housing_count + " Zechen")
 
 
         }

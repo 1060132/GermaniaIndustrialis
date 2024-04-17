@@ -1,18 +1,13 @@
 {
     "Building1": {
-      "x-Coordinate": 4,
-      "y-Coordinate": 7,
-      "type": "Fabrik"
+        "x-Coordinate": 3,
+        "y-Coordinate": 4,
+        "type": "Zeche"
     },
-    "Building2": {
-      "x-Coordinate": 1,
-      "y-Coordinate": 12,
-      "type": "Haus"
-    },
-    "Building3": {
-      "x-Coordinate": 3,
-      "y-Coordinate": 12,
-      "type": "Villa"
+    "counter": {
+        "Haeuser": 0,
+        "Fabriken": 0,
+        "Farmen": 0,
+        "Zechen": 1
     }
-  }
-  
+}

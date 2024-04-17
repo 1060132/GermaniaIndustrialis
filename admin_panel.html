@@ -14,47 +14,142 @@
     <div class="playing-fields">
         <div class="first-game">
             <h2>1880-1891</h2>
-            <div class="buttons">
-              <a id="change-left" onclick="changeGraph(this.id)"><img class="left" src="./invertiertes-dreieck-links.png"></a>
-              <a id="change-right" onclick="changeGraph(this.i)"><img class="right" src="./invertiertes-dreieck-rechts.png"></a>
               <div class="shown"><canvas id="chart" class="admin-chart"></canvas></div>
-            </div>
         </div>
         <div class="second-game">
             <h2>1891-1902</h2>
+            <div class="shown"><canvas id="chart-2" class="admin-chart"></canvas></div>
         </div>
         <div class="third-game">
             <h2>1902-1914</h2>
+            <div class="shown"><canvas id="chart-3" class="admin-chart"></canvas></div>
         </div>
     </div>
 </body>
 <script>
-    let k = 0;
-     const ctx = document.querySelector(".admin-chart").id;
-
-new Chart(ctx, {
-  type: 'bar',
-  data: {
-    labels: ['Fabrik', 'Haus', 'Mine', 'Villa'],
-    datasets: [{
-      label: 'Anzahl an Häusern',
-      data: [3, 19, 3, 2,],
-      borderWidth: 1
-    }]
-  },
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true
-      }
-    }
-  }
-}); 
-
-  function changeGraph(id){
-    document.getElementById(id)
-  }
-
+        fetch('./first-page.json')
+        .then(response => response.json())
+        .then(data => {
+            const counterData = data.counter;
+            const labels = Object.keys(counterData);
+            const values = Object.values(counterData);
+            
+            const ctx = document.getElementById('chart').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Counter Data',
+                        data: values,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        });
+        fetch('./second-page.json')
+        .then(response => response.json())
+        .then(data => {
+            const counterData = data.counter;
+            const labels = Object.keys(counterData);
+            const values = Object.values(counterData);
+            
+            const ctx = document.getElementById('chart-2').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Counter Data',
+                        data: values,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        });
+        fetch('./third-page.json')
+        .then(response => response.json())
+        .then(data => {
+            const counterData = data.counter;
+            const labels = Object.keys(counterData);
+            const values = Object.values(counterData);
+            
+            const ctx = document.getElementById('chart-3').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Counter Data',
+                        data: values,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        });
 
 </script>
 
