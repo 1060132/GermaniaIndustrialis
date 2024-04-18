@@ -5,24 +5,14 @@
         "type": "Zeche"
     },
     "counter": {
-        "Haeuser": 2,
+        "Haeuser": 0,
         "Fabriken": 0,
-        "Farmen": 1,
-        "Zechen": 1
+        "Farmen": 0,
+        "Zechen": 2
     },
     "Building2": {
-        "x-Coordinate": 3,
-        "y-Coordinate": 4,
-        "type": "Farm"
-    },
-    "Building3": {
-        "x-Coordinate": 3,
-        "y-Coordinate": 4,
-        "type": "Haus"
-    },
-    "Building4": {
-        "x-Coordinate": 3,
-        "y-Coordinate": 4,
-        "type": "Haus"
+        "x-Coordinate": 2,
+        "y-Coordinate": 9,
+        "type": "Zeche"
     }
 }

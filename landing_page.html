@@ -103,13 +103,24 @@
     var farm_count = 0;
     var factory_count = 0;
     var zeche_count = 0;
-
+    var multiplier = 0;
     var background = new Image();
     background.src = "./Verlaufskarte_Ruhr2.png";
 
     var map_width = canvas.width / 9;
     var map_height = canvas.height / 15;
 
+    let coalArray = [
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+      ];
+      console.table(coalArray)
     background.onload = function () {
       context.drawImage(background, 0, 0, canvas.width, canvas.height);
 
@@ -208,8 +219,8 @@
         }
       }
 
-      function changeCoal() {
-        document.getElementById("coal-value").innerHTML = zeche_count > 0 ? (zeche_count * 21600 + " t Kohle"): " ";
+      function changeCoal(x_coordinate, y_coordinate) {
+        document.getElementById("coal-value").innerHTML = zeche_count > 0 ? (zeche_count * 21000 + " t Kohle"): " ";
       }
 
       function changeIron() {
@@ -239,7 +250,6 @@
             let building = data[currentBuildingName];
 
             let buildingType = building["type"];
-            console.log(buildingType);
 
             switch (buildingType) {
               case "Haus":
@@ -267,19 +277,19 @@
           factory_count = data.counter.Fabriken;
           farm_count = data.counter.Farmen
           zeche_count = data.counter.Zechen
-          console.log(housing_count, factory_count, farm_count)
-          changeInhabitants()
+          console.log(housing_count, factory_count, farm_count, zeche_count)
           changeCoal()
+          changeInhabitants()
           changeIron()
 
           document.getElementById("housing").innerHTML = 
-          (housing_count >= 1 ? housing_count + " Haus" : housing_count + " Häuser");
+          housing_count == 1 ? (housing_count + " Haus") : (housing_count > 0 ? (housing_count + " Häuser") : "");
           document.getElementById("factories").innerHTML = 
-          (factory_count >= 1 ? zeche_count + " Firma": housing_count + " Firmen")
+          factory_count == 1 ? (factory_count + " Firma") : (factory_count > 0 ? (factory_count + " Firmen"): "")
           document.getElementById("farm").innerHTML = 
-          (farm_count >= 1 ? housing_count + " Bauernhof": housing_count + " Bauernhöfe")
+          farm_count == 1 ? (farm_count + " Bauernhof") : (farm_count > 0 ? (farm_count + " Bauernhöfe"): "")
           document.getElementById("zeche").innerHTML = 
-          (zeche_count >= 1 ? zeche_count + " Zeche": housing_count + " Zechen")
+          zeche_count == 1 ? (zeche_count + " Zeche") : (zeche_count > 0 ? (zeche_count + " Zechen"): "")
 
 
         }
