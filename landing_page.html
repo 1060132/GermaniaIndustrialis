@@ -120,7 +120,16 @@
       [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
       [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
       ];
-      console.table(coalArray)
+      let ironArray = [
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+      ];
     background.onload = function () {
       context.drawImage(background, 0, 0, canvas.width, canvas.height);
 
@@ -254,15 +263,23 @@
             switch (buildingType) {
               case "Haus":
                 placeType = "./icons8-zuhause-50.png";
+                document.getElementById("count_inhabitants").innerHTML = (data.counter.Haeuser == 0 ? " ": data.counter.Haeuser* 15000 + " Einwohner ");
+                
                 break;
               case "Fabrik":
+                factory_count = data.counter.Fabrik
                 placeType = "./3671695_factory_icon.png";
+                document.getElementById("steel-value").innerHTML = (data.counter.Fabriken == 0 ? " ": data.counter.Fabriken * ironArray[building["x-Coordinate"]][building["y-Coordinate"]]  + "t Eisen")
+                document.getElementById("factories").innerHTML = factory_count == 1 ? (factory_count + " Firma") : (factory_count > 0 ? (factory_count + " Firmen"): "")
                 break;
               case "Farm":
                 placeType = "./icons8-bauernhof-100.png";
+                document.getElementById("farm").innerHTML = data.counter.Farm == 1 ? (data.counter.Farm + " Bauernhof") : (data.counter.Farm > 0 ? (data.counter.Farm + " Bauernhöfe"): "")
                 break;
               case "Zeche":
                 placeType = "./icons8-zeche-zollverein-80.png";
+                document.getElementById("coal-value").innerHTML = data.counter.Zechen > 0 ? (data.counter.Zechen * coalArray[building["x-Coordinate"]][building["y-Coordinate"]] + " t Kohle"): " ";
+                document.getElementById("zeche").innerHTML = data.counter.Zechen == 1 ? (data.counter.Zechen + "Zeche"): (data.counter.Zechen > 0 ? (data.counter.Zechen + "Zechen"): " ");
                 break;
             }
 
@@ -271,30 +288,10 @@
               building["y-Coordinate"],
               placeType
             );
+            
           }
-          if(data.counter !== undefined){
-          housing_count =  data.counter.Haeuser;
-          factory_count = data.counter.Fabriken;
-          farm_count = data.counter.Farmen
-          zeche_count = data.counter.Zechen
-          console.log(housing_count, factory_count, farm_count, zeche_count)
-          changeCoal()
-          changeInhabitants()
-          changeIron()
-
-          document.getElementById("housing").innerHTML = 
-          housing_count == 1 ? (housing_count + " Haus") : (housing_count > 0 ? (housing_count + " Häuser") : "");
-          document.getElementById("factories").innerHTML = 
-          factory_count == 1 ? (factory_count + " Firma") : (factory_count > 0 ? (factory_count + " Firmen"): "")
-          document.getElementById("farm").innerHTML = 
-          farm_count == 1 ? (farm_count + " Bauernhof") : (farm_count > 0 ? (farm_count + " Bauernhöfe"): "")
-          document.getElementById("zeche").innerHTML = 
-          zeche_count == 1 ? (zeche_count + " Zeche") : (zeche_count > 0 ? (zeche_count + " Zechen"): "")
-
-
         }
-
-        });
+        );
 
       window.addEventListener("DOMContentLoaded", (event) => {
         var canvas = document.getElementById("meinCanvas");
