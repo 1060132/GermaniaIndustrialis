@@ -103,13 +103,33 @@
     var farm_count = 0;
     var factory_count = 0;
     var zeche_count = 0;
-
+    var multiplier = 0;
     var background = new Image();
     background.src = "./Verlaufskarte_Ruhr2.png";
 
     var map_width = canvas.width / 9;
     var map_height = canvas.height / 15;
 
+    let coalArray = [
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+      ];
+      let ironArray = [
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+      ];
     background.onload = function () {
       context.drawImage(background, 0, 0, canvas.width, canvas.height);
 
@@ -148,27 +168,6 @@
         popup.classList.toggle(given_class);
       }
 
-      function hidePopup(id) {
-        var popup = document.getElementById(id);
-        popup.classList.remove("show-popup");
-        popup.classList.toggle("dreikaiserjahr-window");
-      }
-
-      function closeArbeitsbedingungen() {
-        hidePopup("popup-window");
-      }
-
-      function arbeitsbedingungen() {
-        showPopup("popup-window", "arbeitsbedingungen-window");
-      }
-
-      function hohenzollern() {
-        showPopup("hohenzollern", "hohenzollern-window");
-      }
-
-      function closeHohenzollern() {
-        hidePopup("hohenzollern");
-      }
 
       function move() {
         if (i == 0) {
@@ -180,7 +179,7 @@
 
           elem.innerHTML = startDate.toLocaleDateString();
 
-          var id = setInterval(frame, 6000);
+          var id = setInterval(frame, 600);
 
           function frame() {
             if (currentDate >= endDate) {
@@ -195,21 +194,34 @@
               ); // Berechne den Fortschritt in Prozent
               elem.style.width = progressPercentage + "%";
               elem.innerHTML = currentDate.toLocaleDateString();
-              console.log(currentDate.toLocaleDateString());
               switch (currentDate.toLocaleDateString()) {
                 case "1.2.1880":
                   showPopup("popup-window", "arbeitsbedingungen-window");
                   break;
                 case "1.5.1880":
                     showPopup("hohenzollern" , "hohenzollern-window")
+                    break;
+                case "1.3.1883":
+                  showPopup("arbeitsschutz", "hohenzollern-window")
+                  break;
+                case "1.3.1886":
+                  showPopup("DGB", "hohenzollern-window")
+                  break;
+                case "1.3.1887": 
+                  showPopup("rueckversicherung", "hohenzollern-window")
+                  break;
+                case "1.3.1889": 
+                  showPopup("krupp", "hohenzollern-window")
+                  break;
+                  
               }
             }
           }
         }
       }
 
-      function changeCoal() {
-        document.getElementById("coal-value").innerHTML = zeche_count > 0 ? (zeche_count * 21600 + " t Kohle"): " ";
+      function changeCoal(x_coordinate, y_coordinate) {
+        document.getElementById("coal-value").innerHTML = zeche_count > 0 ? (zeche_count * 21000 + " t Kohle"): " ";
       }
 
       function changeIron() {
@@ -223,16 +235,15 @@
         (housing_count == 0 ? " ": housing_count* 15000 + " Einwohner ");
       }
 
-      fetch("./third-page.json")
+      fetch("./first-page.json")
         .then((response) => response.json())
         .then((data) => {
           let buildingNames = Object.keys(data);
 
           let buildingCount = buildingNames.length;
-          if (buildingCount != 0) {
-            move();
+          if (buildingCount == 0) {;
           } else {
-            startGame = false;
+            move();
           }
 
           for (let i = 0; i < buildingCount; i++) {
@@ -240,21 +251,28 @@
             let building = data[currentBuildingName];
 
             let buildingType = building["type"];
-            console.log(buildingType);
 
             switch (buildingType) {
               case "Haus":
                 placeType = "./icons8-zuhause-50.png";
-                document.getElementById("count_inhabitants").innerHTML = housing_count * 15000;
+                document.getElementById("count_inhabitants").innerHTML = (data.counter.Haeuser == 0 ? " ": data.counter.Haeuser* 15000 + " Einwohner ");
+                
                 break;
               case "Fabrik":
+                factory_count = data.counter.Fabrik
                 placeType = "./3671695_factory_icon.png";
+                document.getElementById("steel-value").innerHTML = (data.counter.Fabriken == 0 ? " ": data.counter.Fabriken * ironArray[building["x-Coordinate"]][building["y-Coordinate"]]  + " t Eisen")
+                document.getElementById("factories").innerHTML = factory_count == 1 ? (factory_count + " Firma") : (factory_count > 0 ? (factory_count + " Firmen"): "")
                 break;
               case "Farm":
                 placeType = "./icons8-bauernhof-100.png";
+                document.getElementById("farm").innerHTML = data.counter.Farm == 1 ? (data.counter.Farm + " Bauernhof") : (data.counter.Farm > 0 ? (data.counter.Farm + " Bauernhöfe"): "")
                 break;
               case "Zeche":
+                console.log(coalArray[building["x-Coordinate"]][building["y-Coordinate"]])
                 placeType = "./icons8-zeche-zollverein-80.png";
+                document.getElementById("coal-value").innerHTML = data.counter.Zechen > 0 ? (data.counter.Zechen * coalArray[building["x-Coordinate"]][building["y-Coordinate"]] + " t Kohle"): " ";
+                document.getElementById("zeche").innerHTML = data.counter.Zechen == 1 ? (data.counter.Zechen + "Zeche"): (data.counter.Zechen > 0 ? (data.counter.Zechen +  " Zechen"): " ");
                 break;
             }
 
@@ -263,30 +281,10 @@
               building["y-Coordinate"],
               placeType
             );
+            
           }
-          if(data.counter !== undefined){
-          housing_count =  data.counter.Haeuser;
-          factory_count = data.counter.Fabriken;
-          farm_count = data.counter.Farmen
-          zeche_count = data.counter.Zechen
-          console.log(housing_count, factory_count, farm_count)
-          changeInhabitants()
-          changeCoal()
-          changeIron()
-
-          document.getElementById("housing").innerHTML = 
-          housing_count >= 1 ? (housing_count + " Haus") : (housing_count > 0 ? (housing_count + " Häuser") : "");
-          document.getElementById("factories").innerHTML = 
-          factory_count >= 1 ? (factory_count + " Firma") : (factory_count > 0 ? (factory_count + " Häuser"): "")
-          document.getElementById("farm").innerHTML = 
-          farm_count >= 1 ? (farm_count + " Bauernhof") : (farm_count > 0 ? (farm_count + " Häuser"): "")
-          document.getElementById("zeche").innerHTML = 
-          zeche_count >= 1 ? (zeche_count + " Zeche") : (zeche_count > 0 ? (zeche_count + " Zechen"): "")
-
-
         }
-
-        });
+        );
 
       window.addEventListener("DOMContentLoaded", (event) => {
         var canvas = document.getElementById("meinCanvas");
