@@ -24,11 +24,14 @@
     <meta name="theme-color" content="#ffffff">
   </head>
   <body class="root">
+    <audio id="soundFX">
+      <source src="./Ding - Sound Effect (HD).mp3" type="audio/mpeg">
+    </audio>
     <header>
       <h1 class="main-title">Germania Industrialis</h1>
       <div class="epoch-div">
         <ul>
-          <li><a class="epoch-choser" href="#">1880</a></li>
+          <li><a class="epoch-choser" href="./landing_page.html">1880</a></li>
           <li><a class="epoch-choser" href="./1895.html">1895</a></li>
           <li><a class="epoch-choser" href="./1910.html">1914</a></li>
         </ul>
@@ -203,6 +206,7 @@ Die Krupp-Gruppe, ein führender deutscher Stahl- und Rüstungshersteller, errei
         var popup = document.getElementById(id);
         popup.classList.remove(given_class);
         popup.classList.toggle("show-popup");
+        document.getElementById("soundFX").play()
         console.log(popup.classList);
         await Sleep(1800);
         popup.classList.remove("show-popup");
@@ -232,7 +236,7 @@ Die Krupp-Gruppe, ein führender deutscher Stahl- und Rüstungshersteller, errei
                 ((currentDate.getTime() - startDate.getTime()) /
                   (endDate.getTime() - startDate.getTime())) *
                   100
-              ); // Berechne den Fortschritt in Prozent
+              );
               elem.style.width = progressPercentage + "%";
               elem.innerHTML = currentDate.toLocaleDateString();
               switch (currentDate.toLocaleDateString()) {
@@ -340,7 +344,6 @@ Die Krupp-Gruppe, ein führender deutscher Stahl- und Rüstungshersteller, errei
 
         window.addEventListener("resize", setCanvasSize);
       });
-
     };
   </script>
 </html>

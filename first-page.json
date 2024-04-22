@@ -1,34 +1,34 @@
 {
     "Building1": {
+        "x-Coordinate": 1,
+        "y-Coordinate": 6,
+        "type": "Haus"
+    },
+    "Building2": {
         "x-Coordinate": 3,
         "y-Coordinate": 4,
         "type": "Zeche"
     },
     "counter": {
-        "Haeuser": 2,
+        "Haeuser": 1,
         "Fabriken": 1,
         "Farmen": 1,
         "Zechen": 2
     },
-    "Building2": {
+    "Building3": {
         "x-Coordinate": 2,
         "y-Coordinate": 9,
         "type": "Zeche"
     },
-    "Building3": {
+    "Building4": {
         "x-Coordinate": 3,
         "y-Coordinate": 7,
         "type": "Farm"
     },
-    "Building4": {
+    "Building5": {
         "x-Coordinate": 2,
         "y-Coordinate": 5,
         "type": "Fabrik"
-    },
-    "Building5": {
-        "x-Coordinate": 6,
-        "y-Coordinate": 9,
-        "type": "Haus"
     },
     "Building6": {
         "x-Coordinate": 6,
