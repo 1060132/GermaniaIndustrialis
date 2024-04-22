@@ -46,6 +46,15 @@ body{
     text-align: center;
 }
 
+.scatter{
+    width:37.5%;
+    border-width: 5px;
+    border-color: black;
+    border: solid;
+    height: 555px;
+    margin: 50px;
+    text-align: center;
+}
 
 .right{
     width: 30px;

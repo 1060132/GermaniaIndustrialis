@@ -24,6 +24,10 @@
             <h2>1902-1914</h2>
             <div class="shown"><canvas id="chart-3" class="admin-chart"></canvas></div>
         </div>
+        <div class="scatter">
+            <h2>1902-1914</h2>
+            <div class="shown"><canvas id="chart-4" class="admin-chart"></canvas></div>
+        </div>
     </div>
 </body>
 <script>
@@ -109,6 +113,88 @@
                 }
             });
         });
+        fetch('first-page.json')
+            .then(response => response.json())
+            .then(data => {
+                const buildings = Object.values(data).filter(obj => obj.hasOwnProperty('x-Coordinate') && obj.hasOwnProperty('y-Coordinate'));
+                const coordinates = buildings.map(building => ({
+                    x: building['x-Coordinate'],
+                    y: building['y-Coordinate'],
+                    type: building['type']
+                }));
+
+                const ctx = document.getElementById('chart-4').getContext('2d');
+                const myScatterChart = new Chart(ctx, {
+                    type: 'scatter',
+                    data: {
+                        datasets: coordinates.reduce((acc, coord) => {
+                            const color = getColorByType(coord.type);
+                            if (!acc[coord.type]) {
+                                acc[coord.type] = {
+                                    label: coord.type,
+                                    data: [],
+                                    backgroundColor: color,
+                                    borderColor: color,
+                                    borderWidth: 1
+                                };
+                                acc.push(acc[coord.type]);
+                            }
+                            acc[coord.type].data.push(coord);
+                            return acc;
+                        }, [])
+                    },
+                    options: {
+                        scales: {
+                            x: {
+                                type: 'linear',
+                                position: 'bottom'
+                            },
+                            y: {
+                                type: 'linear',
+                                position: 'left'
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    usePointStyle: true
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+
+        function getColorByType(type) {
+            switch (type) {
+                case 'Haus':
+                    return 'rgba(255, 99, 132, 0.5)'; // Rot
+                case 'Fabrik':
+                    return 'rgba(54, 162, 235, 0.5)'; // Blau
+                case 'Farm':
+                    return 'rgba(255, 206, 86, 0.5)'; // Gelb
+                case 'Zeche':
+                    return 'rgba(75, 192, 192, 0.5)'; // Grün
+                default:
+                    return 'rgba(0, 0, 0, 0.5)'; // Schwarz (falls der Typ nicht übereinstimmt)
+            }
+        }
+
+        function getColorByType(type) {
+            switch (type) {
+                case 'Haus':
+                    return 'rgba(255, 99, 132, 0.5)'; // Rot
+                case 'Fabrik':
+                    return 'rgba(54, 162, 235, 0.5)'; // Blau
+                case 'Farm':
+                    return 'rgba(255, 206, 86, 0.5)'; // Gelb
+                case 'Zeche':
+                    return 'rgba(75, 192, 192, 0.5)'; // Grün
+                default:
+                    return 'rgba(0, 0, 0, 0.5)'; // Schwarz (falls der Typ nicht übereinstimmt)
+            }
+        }
         fetch('./third-page.json')
         .then(response => response.json())
         .then(data => {

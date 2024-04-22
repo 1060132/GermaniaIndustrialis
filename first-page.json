@@ -5,7 +5,7 @@
         "type": "Zeche"
     },
     "counter": {
-        "Haeuser": 1,
+        "Haeuser": 2,
         "Fabriken": 1,
         "Farmen": 1,
         "Zechen": 2
@@ -26,6 +26,11 @@
         "type": "Fabrik"
     },
     "Building5": {
+        "x-Coordinate": 6,
+        "y-Coordinate": 9,
+        "type": "Haus"
+    },
+    "Building6": {
         "x-Coordinate": 6,
         "y-Coordinate": 9,
         "type": "Haus"
