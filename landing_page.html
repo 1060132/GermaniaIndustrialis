@@ -5,6 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Germania Industrialis</title>
     <link rel="stylesheet" href="./landing_page.css" />
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
   </head>
   <body class="root">
     <header>
@@ -84,6 +101,30 @@
           Das Haus Hohenzollern war eine der bedeutesten Dynastien der Deutschen
           Geschichte, auch in der Zeit der Hochindustrialisierung hatte sie
           großen Einfluss
+        </p>
+      </div>
+      <div class="hohenzollern-window" id="arbeitsschutz">
+        <p class="working-conditions">
+          Verabschiedung des Arbeiterschutzgesetzes (1883):
+          Das Arbeiterschutzgesetz von 1883 war ein Meilenstein in der deutschen Sozialgesetzgebung. Es legte Mindeststandards für Arbeitsbedingungen und Sicherheitsvorkehrungen fest und markierte einen bedeutenden Schritt hin zur Verbesserung der Arbeitsverhältnisse für Industriearbeiter.
+        </p>
+      </div>
+      <div class="hohenzollern-window" id="DGB">
+        <p class="working-conditions">
+          Gründung des Deutschen Gewerkschaftsbunds (1886):
+          Der Deutsche Gewerkschaftsbund (DGB) wurde als Dachverband für verschiedene Arbeitergewerkschaften gegründet. Er spielte eine wichtige Rolle bei der Organisation und Vertretung der Interessen der Arbeiterschaft während der Industrialisierung.
+        </p>
+      </div>
+      <div class="hohenzollern-window" id="rueckversicherung">
+        <p class="working-conditions">
+          Bismarcks Rückversicherungsvertrag (1887):
+Um das Deutsche Reich vor einer zweifrontigen Bedrohung zu schützen, schloss Otto von Bismarck einen geheimen Vertrag mit Russland. Dieser Vertrag sollte Deutschland eine gewisse Sicherheit gegenüber Frankreich verschaffen, indem es eine vorübergehende Allianz mit Russland einging.
+        </p>
+      </div>
+      <div class="hohenzollern-window" id="krupp">
+        <p class="working-conditions">
+          Krupp-Stahlkonkurrenz (1889):
+Die Krupp-Gruppe, ein führender deutscher Stahl- und Rüstungshersteller, erreichte in den späten 1880er Jahren einen Höhepunkt in der Produktion. Ihr technologischer Fortschritt und ihre Effizienz machten sie zu einem der größten und einflussreichsten Unternehmen Europas.
         </p>
       </div>
       <div class="wrapper">
@@ -168,27 +209,6 @@
         popup.classList.toggle(given_class);
       }
 
-      function hidePopup(id) {
-        var popup = document.getElementById(id);
-        popup.classList.remove("show-popup");
-        popup.classList.toggle("dreikaiserjahr-window");
-      }
-
-      function closeArbeitsbedingungen() {
-        hidePopup("popup-window");
-      }
-
-      function arbeitsbedingungen() {
-        showPopup("popup-window", "arbeitsbedingungen-window");
-      }
-
-      function hohenzollern() {
-        showPopup("hohenzollern", "hohenzollern-window");
-      }
-
-      function closeHohenzollern() {
-        hidePopup("hohenzollern");
-      }
 
       function move() {
         if (i == 0) {
@@ -200,7 +220,7 @@
 
           elem.innerHTML = startDate.toLocaleDateString();
 
-          var id = setInterval(frame, 6000);
+          var id = setInterval(frame, 600);
 
           function frame() {
             if (currentDate >= endDate) {
@@ -215,13 +235,26 @@
               ); // Berechne den Fortschritt in Prozent
               elem.style.width = progressPercentage + "%";
               elem.innerHTML = currentDate.toLocaleDateString();
-              console.log(currentDate.toLocaleDateString());
               switch (currentDate.toLocaleDateString()) {
                 case "1.2.1880":
                   showPopup("popup-window", "arbeitsbedingungen-window");
                   break;
                 case "1.5.1880":
                     showPopup("hohenzollern" , "hohenzollern-window")
+                    break;
+                case "1.3.1883":
+                  showPopup("arbeitsschutz", "hohenzollern-window")
+                  break;
+                case "1.3.1886":
+                  showPopup("DGB", "hohenzollern-window")
+                  break;
+                case "1.3.1887": 
+                  showPopup("rueckversicherung", "hohenzollern-window")
+                  break;
+                case "1.3.1889": 
+                  showPopup("krupp", "hohenzollern-window")
+                  break;
+                  
               }
             }
           }
@@ -251,7 +284,7 @@
           let buildingCount = buildingNames.length;
           if (buildingCount == 0) {;
           } else {
-            startGame = false;
+            move();
           }
 
           for (let i = 0; i < buildingCount; i++) {
@@ -269,7 +302,7 @@
               case "Fabrik":
                 factory_count = data.counter.Fabrik
                 placeType = "./3671695_factory_icon.png";
-                document.getElementById("steel-value").innerHTML = (data.counter.Fabriken == 0 ? " ": data.counter.Fabriken * ironArray[building["x-Coordinate"]][building["y-Coordinate"]]  + "t Eisen")
+                document.getElementById("steel-value").innerHTML = (data.counter.Fabriken == 0 ? " ": data.counter.Fabriken * ironArray[building["x-Coordinate"]][building["y-Coordinate"]]  + " t Eisen")
                 document.getElementById("factories").innerHTML = factory_count == 1 ? (factory_count + " Firma") : (factory_count > 0 ? (factory_count + " Firmen"): "")
                 break;
               case "Farm":
@@ -277,9 +310,10 @@
                 document.getElementById("farm").innerHTML = data.counter.Farm == 1 ? (data.counter.Farm + " Bauernhof") : (data.counter.Farm > 0 ? (data.counter.Farm + " Bauernhöfe"): "")
                 break;
               case "Zeche":
+                console.log(coalArray[building["x-Coordinate"]][building["y-Coordinate"]])
                 placeType = "./icons8-zeche-zollverein-80.png";
                 document.getElementById("coal-value").innerHTML = data.counter.Zechen > 0 ? (data.counter.Zechen * coalArray[building["x-Coordinate"]][building["y-Coordinate"]] + " t Kohle"): " ";
-                document.getElementById("zeche").innerHTML = data.counter.Zechen == 1 ? (data.counter.Zechen + "Zeche"): (data.counter.Zechen > 0 ? (data.counter.Zechen + "Zechen"): " ");
+                document.getElementById("zeche").innerHTML = data.counter.Zechen == 1 ? (data.counter.Zechen + "Zeche"): (data.counter.Zechen > 0 ? (data.counter.Zechen +  " Zechen"): " ");
                 break;
             }
 

@@ -103,3 +103,6 @@ def remove_building(json_file_path, x_coordinate, y_coordinate, building_type):
 
 add_building_to_json("./first-page.json", 3, 4, "Zeche")
 add_building_to_json("./first-page.json", 2, 9, "Zeche")
+add_building_to_json("./first-page.json", 3, 7, "Farm")
+add_building_to_json("./first-page.json", 2, 5, "Fabrik")
+add_building_to_json("./first-page.json", 6, 9, "Haus")
