@@ -74,7 +74,7 @@ void loop()
         SerialESP.print(y); // y-Koordinate senden
         SerialESP.print(",");
         SerialESP.print("t")
-            SerialESP.println(potValue);
+            SerialESP.println(type);
         SerialESP.println(".")
 
             currentState = WAIT_CLOCK_HIGH;
