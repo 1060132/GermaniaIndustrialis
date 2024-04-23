@@ -1,4 +1,5 @@
 import json
+from serial import Serial
 import serial
 import threading
 

@@ -7,7 +7,6 @@ const int rowPin = 13; // Pin für die Reihe
 const int colPin = 12; // Pin für die Spalte
 unsigned long previousMillis = 0;
 unsigned long interval = 9;
-int potValue;
 int type;
 
 enum State
@@ -39,8 +38,9 @@ void loop()
   {
     for (int x = 0; x < numCols; x++)
     {
-      digitalWrite(rowPin, LOW)
-          digitalWrite(colPin, LOW) switch (currentState)
+      digitalWrite(rowPin, LOW);
+      digitalWrite(colPin, LOW);
+      switch (currentState)
       {
       case WAIT_CLOCK_HIGH:
         if (currentMillis - previousMillis >= interval)
@@ -52,37 +52,29 @@ void loop()
 
       case READ_POT_VALUE:
         int potValue = analogRead(potPin);
-        switch (potValue)
-        {
-        case 1861 < potValue < 2295:
+        Serial.print(potValue);
+        if (potValue > 1861 && potValue < 2295)
           type = 1;
-          break;
-        case 2295 < potValue < 2729:
+        else if (potValue > 2295 && potValue < 2729)
           type = 2;
-          break;
-        case 2729 < potValue < 3163:
+        else if (potValue > 2729 && potValue < 3163)
           type = 3;
-          break;
-        case 3163 < potValue < 3597:
+        else if (potValue > 3163 && potValue < 3597)
           type = 4;
-          break;
-        default:
-          break;
-        }
+        Serial.print(type);
         SerialESP.print(x); // x-Koordinate senden
         SerialESP.print(",");
         SerialESP.print(y); // y-Koordinate senden
         SerialESP.print(",");
-        SerialESP.print("t")
-            SerialESP.println(type);
-        SerialESP.println(".")
-
-            currentState = WAIT_CLOCK_HIGH;
+        SerialESP.print("t");
+        SerialESP.println(type);
+        SerialESP.println(".");
+        currentState = WAIT_CLOCK_HIGH;
         break;
       }
-      digitalWrite(colPin, HIGH)
-          delay(100); // Kurze Pause zwischen den Schaltungen
+      digitalWrite(colPin, HIGH);
+      delay(100); // Kurze Pause zwischen den Schaltungen
     }
-    digitalWrite(rowPin, HIGH)
+    digitalWrite(rowPin, HIGH);
   }
 }
