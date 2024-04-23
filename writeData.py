@@ -80,7 +80,8 @@ def remove_building(json_file_path, x_coordinate, y_coordinate, building_type):
                 elif building_type == "Zeche":
                     counts["Zechen"] -= 1
                 to_remove.append(building_name)
-
+            else:
+                print("building not to be removed")
         for name in to_remove:
             del data[name]
 
@@ -95,6 +96,11 @@ add_building_to_json("./first-page.json", 2, 9, "Zeche")
 add_building_to_json("./first-page.json", 3, 7, "Farm")
 add_building_to_json("./first-page.json", 2, 5, "Fabrik")
 add_building_to_json("./first-page.json", 6, 9, "Haus")
+
+
+def convertType(num):
+
+
 
 
 
@@ -122,12 +128,59 @@ while True:
                     type += data_first[index]
                 else:
                     type = type[-1]
+    with open("./first-page.json") as file:
+    
 
 
     data_second = ser_second.read()
     data_left_second = ser_second.in_waiting()
     data_second += ser_second.read(data_left_second)
+    if not data_second == " ":
+        for index, char in enumerate(data_second):
+            if char == "x":
+                x_coordinate2 = data_second[index + 1]
+                if "," in x_coordinate2:
+                    break
+                else:
+                    x_coordinate2 += data_second[index + 2]
+            elif char == "y":
+                y_coordinate2 = data_second[index + 1]
+                if "," in y_coordinate2:
+                    break
+                else:
+                    y_coordinate2 += data_second[index + 2]
+            elif char == "t":
+                type2 = ""
+                while not "." in type2:
+                    type2 += data_second[index]
+                else:
+                    type2 = type2[-1]
 
     data_third = ser_third.read()
     data_left_third = ser_third.in_waiting()
     data_third += ser_third.read(data_left_third)
+    if not data_third == " ":
+        for index, char in enumerate(data_third):
+            if char == "x":
+                x_coordinate3 = data_third[index + 1]
+                if "," in x_coordinate3:
+                    break
+                else:
+                    x_coordinate3 += data_third[index + 2]
+            elif char == "y":
+                y_coordinate3 = data_third[index + 1]
+                if "," in y_coordinate3:
+                    break
+                else:
+                    y_coordinate3 += data_third[index + 2]
+            elif char == "t":
+                type3 = ""
+                while not "." in type3:
+                    type3 += data_second[index]
+                else:
+                    type3 = type3[-1]
+            
+    
+
+
+

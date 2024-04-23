@@ -150,20 +150,22 @@ Die Krupp-Gruppe, ein führender deutscher Stahl- und Rüstungshersteller, errei
     var multiplier = 0;
     var background = new Image();
     background.src = "./Verlaufskarte_Ruhr2.png";
+    var coalSum = 0;
+    var ironSum = 0;
 
     var map_width = canvas.width / 9;
     var map_height = canvas.height / 15;
 
-    let coalArray = [
-      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
-      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
-      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
-      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
-      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
-      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
-      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
-      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
-      ];
+        let coalArray = [
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 80, 90, 0, 0, 70, 90, 70, 0],
+      [0, 0, 0, 0, 50, 100, 100, 100, 100, 100, 95, 60, 0, 0],
+      [0, 0, 0, 0, 60, 100, 100, 100, 50, 40, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 50, 50, 0, 0, 0, 0, 0, 0]
+    ];
       let ironArray = [
       [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
       [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
@@ -305,6 +307,7 @@ Die Krupp-Gruppe, ein führender deutscher Stahl- und Rüstungshersteller, errei
                 break;
               case "Fabrik":
                 factory_count = data.counter.Fabrik
+                ironSum += 
                 placeType = "./3671695_factory_icon.png";
                 document.getElementById("steel-value").innerHTML = (data.counter.Fabriken == 0 ? " ": data.counter.Fabriken * ironArray[building["x-Coordinate"]][building["y-Coordinate"]]  + " t Eisen")
                 document.getElementById("factories").innerHTML = factory_count == 1 ? (factory_count + " Firma") : (factory_count > 0 ? (factory_count + " Firmen"): "")
@@ -315,8 +318,9 @@ Die Krupp-Gruppe, ein führender deutscher Stahl- und Rüstungshersteller, errei
                 break;
               case "Zeche":
                 console.log(coalArray[building["x-Coordinate"]][building["y-Coordinate"]])
+                coalSum += 1000 * (coalArray[building["x-Coordinate"]][building["y-Coordinate"]] / 100)
                 placeType = "./icons8-zeche-zollverein-80.png";
-                document.getElementById("coal-value").innerHTML = data.counter.Zechen > 0 ? (data.counter.Zechen * coalArray[building["x-Coordinate"]][building["y-Coordinate"]] + " t Kohle"): " ";
+                document.getElementById("coal-value").innerHTML = data.counter.Zechen > 0 ? (coalSum + " t Kohle"): " ";
                 document.getElementById("zeche").innerHTML = data.counter.Zechen == 1 ? (data.counter.Zechen + "Zeche"): (data.counter.Zechen > 0 ? (data.counter.Zechen +  " Zechen"): " ");
                 break;
             }
