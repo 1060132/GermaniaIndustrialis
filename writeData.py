@@ -1,25 +1,14 @@
 import json
-import subprocess
+import serial
 housing_count  = 0
 farm_count = 0
 factory_count = 0
 zechen_count = 0
 
-'''
-command = ["python3", "-m", "serial.tools.miniterm", "/dev/ttyUSB0", "115200"]
-print(command)
+ser_first = serial.Serial("/dev/ttAMA0", 115200)
+ser_second  = serial.Serial("/dev/ttyAMA1", 115200)
+ser_third = serial.Serial("dev/ttyAMA2", 115200)
 
-subprocess.run(command)
-
-os.system()
-ser = serial.Serial(/dev/ttyUSB0, 115200)
-
-
-While True: 
-    readedText = ser.readline()
-    print(readedText)
-    ser.close()#
-    '''
 
 
 
@@ -106,3 +95,39 @@ add_building_to_json("./first-page.json", 2, 9, "Zeche")
 add_building_to_json("./first-page.json", 3, 7, "Farm")
 add_building_to_json("./first-page.json", 2, 5, "Fabrik")
 add_building_to_json("./first-page.json", 6, 9, "Haus")
+
+
+
+while True:
+    data_first = ser_first.read()
+    data_left = ser_first.in_waiting()
+    data_first += ser_first.read(data_left)
+    if not data_first == " ":
+        for index, char in enumerate(data_first):
+            if char == "x":
+                x_coordinate = data_first[index + 1]
+                if "," in x_coordinate:
+                    break
+                else:
+                    x_coordinate += data_first[index + 2]
+            elif char == "y":
+                y_coordinate = data_first[index + 1]
+                if "," in y_coordinate:
+                    break
+                else:
+                    y_coordinate += data_first[index + 2]
+            elif char == "t":
+                type = ""
+                while not "." in type:
+                    type += data_first[index]
+                else:
+                    type = type[-1]
+
+
+    data_second = ser_second.read()
+    data_left_second = ser_second.in_waiting()
+    data_second += ser_second.read(data_left_second)
+
+    data_third = ser_third.read()
+    data_left_third = ser_third.in_waiting()
+    data_third += ser_third.read(data_left_third)
