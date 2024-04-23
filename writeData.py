@@ -99,10 +99,17 @@ add_building_to_json("./first-page.json", 6, 9, "Haus")
 
 
 def convertType(num):
-
-
-
-
+    if num == 3722:
+        modell = "none"
+    elif 1800 < num < 2234:
+        modell = "Farm"
+    elif 2234 < num < 2668:
+        modell = "Fabrik"
+    elif 2668 < num < 3102:
+        modell = "Haus"
+    elif 3102 < num < 3536:
+        modell = "Zeche"
+    return modell
 
 while True:
     data_first = ser_first.read()
@@ -128,7 +135,9 @@ while True:
                     type += data_first[index]
                 else:
                     type = type[-1]
-    with open("./first-page.json") as file:
+        type =  convertType(type)
+        add_building_to_json("./first-page.json", x_coordinate, y_coordinate, type)
+
     
 
 
@@ -179,8 +188,3 @@ while True:
                     type3 += data_second[index]
                 else:
                     type3 = type3[-1]
-            
-    
-
-
-
