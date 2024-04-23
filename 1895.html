@@ -87,26 +87,27 @@
       </div>
       <div class="hohenzollern-window" id="arbeitsschutz">
         <p class="working-conditions">
-          Verabschiedung des Arbeiterschutzgesetzes (1883):
-          Das Arbeiterschutzgesetz von 1883 war ein Meilenstein in der deutschen Sozialgesetzgebung. Es legte Mindeststandards für Arbeitsbedingungen und Sicherheitsvorkehrungen fest und markierte einen bedeutenden Schritt hin zur Verbesserung der Arbeitsverhältnisse für Industriearbeiter.
+          IG Farben (1895):
+    Die Gründung der Interessengemeinschaft Farbenindustrie AG (IG Farben) im Jahr 1895 markierte einen Meilenstein in der deutschen chemischen Industrie. Die IG Farben wurde zu einem der größten Chemiekonzerne der Welt und spielte eine entscheidende Rolle in der Entwicklung von Farbstoffen, Kunststoffen und anderen chemischen Produkten.
+
         </p>
       </div>
       <div class="hohenzollern-window" id="DGB">
         <p class="working-conditions">
-          Gründung des Deutschen Gewerkschaftsbunds (1886):
-          Der Deutsche Gewerkschaftsbund (DGB) wurde als Dachverband für verschiedene Arbeitergewerkschaften gegründet. Er spielte eine wichtige Rolle bei der Organisation und Vertretung der Interessen der Arbeiterschaft während der Industrialisierung.
+          Sozialistengesetz (1890):
+Die Verabschiedung des Sozialistengesetzes im Jahr 1890 war ein wichtiger politischer Schritt zur Unterdrückung sozialistischer und kommunistischer Bewegungen in Deutschland. Das Gesetz verbot sozialistische Organisationen und Zeitungen und führte zur Verfolgung von sozialistischen Aktivisten.
         </p>
       </div>
       <div class="hohenzollern-window" id="rueckversicherung">
         <p class="working-conditions">
-          Bismarcks Rückversicherungsvertrag (1887):
-Um das Deutsche Reich vor einer zweifrontigen Bedrohung zu schützen, schloss Otto von Bismarck einen geheimen Vertrag mit Russland. Dieser Vertrag sollte Deutschland eine gewisse Sicherheit gegenüber Frankreich verschaffen, indem es eine vorübergehende Allianz mit Russland einging.
+          Gründung der Daimler-Motoren-Gesellschaft (1900):
+Im Jahr 1900 wurde die Daimler-Motoren-Gesellschaft (DMG) gegründet, die später mit der Benz & Cie. zur Daimler-Benz AG fusionierte. Die DMG war ein führender Hersteller von Automobilen und spielte eine wichtige Rolle in der Entwicklung des deutschen Automobilsektors.
         </p>
       </div>
       <div class="hohenzollern-window" id="krupp">
         <p class="working-conditions">
-          Krupp-Stahlkonkurrenz (1889):
-Die Krupp-Gruppe, ein führender deutscher Stahl- und Rüstungshersteller, erreichte in den späten 1880er Jahren einen Höhepunkt in der Produktion. Ihr technologischer Fortschritt und ihre Effizienz machten sie zu einem der größten und einflussreichsten Unternehmen Europas.
+          Erste Zivile Reichsregierung (1900):
+Im Jahr 1900 bildete der deutsche Kaiser Wilhelm II. die erste zivile Reichsregierung unter der Leitung von Reichskanzler Bernhard von Bülow. Dies markierte einen wichtigen Schritt in Richtung parlamentarischer Regierungsführung und repräsentierte einen Wandel von der rein militärischen zur zivilen Führungsebene in der deutschen Politik.
         </p>
       </div>
       <div class="wrapper">
@@ -196,9 +197,9 @@ Die Krupp-Gruppe, ein führender deutscher Stahl- und Rüstungshersteller, errei
         if (i == 0) {
           i = 1;
           var elem = document.getElementById("bar");
-          var startDate = new Date(1880, 0, 1);
+          var startDate = new Date(1895, 0, 1);
           var currentDate = new Date(startDate);
-          var endDate = new Date(1891, 0, 1);
+          var endDate = new Date(1905, 0, 1);
 
           elem.innerHTML = startDate.toLocaleDateString();
 
@@ -218,22 +219,22 @@ Die Krupp-Gruppe, ein führender deutscher Stahl- und Rüstungshersteller, errei
               elem.style.width = progressPercentage + "%";
               elem.innerHTML = currentDate.toLocaleDateString();
               switch (currentDate.toLocaleDateString()) {
-                case "1.2.1880":
+                case "1.2.1895":
                   showPopup("popup-window", "arbeitsbedingungen-window");
                   break;
-                case "1.5.1880":
+                case "1.5.1896":
                     showPopup("hohenzollern" , "hohenzollern-window")
                     break;
-                case "1.3.1883":
+                case "1.7.1895":
                   showPopup("arbeitsschutz", "hohenzollern-window")
                   break;
-                case "1.3.1886":
+                case "1.3.1897":
                   showPopup("DGB", "hohenzollern-window")
                   break;
-                case "1.3.1887": 
+                case "1.3.1900": 
                   showPopup("rueckversicherung", "hohenzollern-window")
                   break;
-                case "1.3.1889": 
+                case "1.12.1900": 
                   showPopup("krupp", "hohenzollern-window")
                   break;
                   

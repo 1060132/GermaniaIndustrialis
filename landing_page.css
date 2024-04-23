@@ -144,7 +144,7 @@
 .show-popup{
     width:560px;
     height: 500px;
-    font-family:"UnifrakturMaguntia", cursive;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     background-color: white;
     visibility: visible;
     background-color: #555;
