@@ -38,8 +38,14 @@
       </div>
     </header>
     <div class="content">
-      <div class="map">
+      <div class="map-canvas">
         <canvas id="map" width="1400" height="850" class="map-img"></canvas>
+      </div>
+      <div class="sidebar">
+        <img src="./8541853_home_icon (1).png" alt="Image 1" class="draggable" draggable="true" id="pic">
+        <img src="./icons8-zeche-zollverein-80.png" alt="Image 2" class="draggable" draggable="true" id="pic">
+        <img src="./icons8-mine-64.png" alt="Image 3" class="draggable" draggable="true" id="pic">
+    
       </div>
       <div class="data">
         <div class="objects-first">
@@ -142,7 +148,7 @@ Die Krupp-Gruppe, ein führender deutscher Stahl- und Rüstungshersteller, errei
     var placeType;
     var i = 0;
     var housing_count = 0;
-    var canvas = document.getElementById("map");
+    const canvas = document.getElementById("map");
     var context = canvas.getContext("2d");
     var farm_count = 0;
     var factory_count = 0;
@@ -152,9 +158,12 @@ Die Krupp-Gruppe, ein führender deutscher Stahl- und Rüstungshersteller, errei
     background.src = "./Verlaufskarte_Ruhr2.png";
     var coalSum = 0;
     var ironSum = 0;
-
     var map_width = canvas.width / 9;
     var map_height = canvas.height / 15;
+    const ctx = canvas.getContext("2d")
+    const draggableImg = document.querySelectorAll(".draggable")
+    console.log(draggableImg)
+    let images  = [];
 
         let coalArray = [
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -178,10 +187,68 @@ Die Krupp-Gruppe, ein führender deutscher Stahl- und Rüstungshersteller, errei
       ];
     background.onload = function () {
       context.drawImage(background, 0, 0, canvas.width, canvas.height);
-
       function Sleep(milliseconds) {
         return new Promise((resolve) => setTimeout(resolve, milliseconds));
       }
+
+      canvas.addEventListener("dragover", function(event){
+        event.preventDefault();
+        console.log("drag")
+      });
+
+
+      draggableImg.forEach(img => {
+    img.addEventListener('dragstart', function(event) {
+        event.dataTransfer.setData('text/plain', ''); // Erforderlich für das Drag & Drop
+        console.log("mösenbrock")
+    });
+
+    img.addEventListener('drop', function(event) {
+        event.preventDefault();
+      
+        const rect = canvas.getBoundingClientRect();
+        const x = event.clientX - rect.left - img.width / 2; // Die Hälfte der Bildbreite abziehen, um das Zentrum zu erhalten
+        const y = event.clientY - rect.top - img.height / 2; // Die Hälfte der Bildhöhe abziehen, um das Zentrum zu erhalten
+
+        const newImg = new Image();
+        newImg.src = img.src;
+
+        newImg.onload = function() {
+            ctx.drawImage(newImg, x, y);
+            console.log("Bild gemalt");
+            images.push({ x, y, img: newImg }); // Bild und Position dem Array hinzufügen
+        };
+    });
+});
+
+
+    canvas.addEventListener('click', function(event) {
+      const rect = canvas.getBoundingClientRect();
+      const clickX = event.clientX - rect.left;
+      const clickY = event.clientY - rect.top;
+
+      // Überprüfen, ob das Klick auf ein Bild liegt
+      for (let i = images.length - 1; i >= 0; i--) {
+        const imgObj = images[i];
+        if (clickX >= imgObj.x && clickX <= imgObj.x + imgObj.img.width &&
+            clickY >= imgObj.y && clickY <= imgObj.y + imgObj.img.height) {
+          images.splice(i, 1);
+          redrawCanvas();
+          break;
+        }
+      }
+    });
+
+
+    function redrawCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      images.forEach(imgObj => {
+        ctx.drawImage(imgObj.img, imgObj.x, imgObj.y);
+      });
+    }
+
+
+
 
       function placeObject(x, y, object) {
         var posX = x * map_width;
@@ -336,7 +403,7 @@ Die Krupp-Gruppe, ein führender deutscher Stahl- und Rüstungshersteller, errei
         );
 
       window.addEventListener("DOMContentLoaded", (event) => {
-        var canvas = document.getElementById("meinCanvas");
+        var canvas = document.getElementById("map");
         var context = canvas.getContext("2d");
 
         function setCanvasSize() {
