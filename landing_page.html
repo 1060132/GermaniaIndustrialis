@@ -22,6 +22,7 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
+    <script src="https://unpkg.com/konva@9.3.6/konva.min.js"></script>
   </head>
   <body class="root">
     <audio id="soundFX">
@@ -161,8 +162,6 @@ Die Krupp-Gruppe, ein führender deutscher Stahl- und Rüstungshersteller, errei
     var map_width = canvas.width / 9;
     var map_height = canvas.height / 15;
     const ctx = canvas.getContext("2d")
-    const draggableImg = document.querySelectorAll(".draggable")
-    console.log(draggableImg)
     let images  = [];
 
         let coalArray = [
@@ -190,62 +189,6 @@ Die Krupp-Gruppe, ein führender deutscher Stahl- und Rüstungshersteller, errei
       function Sleep(milliseconds) {
         return new Promise((resolve) => setTimeout(resolve, milliseconds));
       }
-
-      canvas.addEventListener("dragover", function(event){
-        event.preventDefault();
-        console.log("drag")
-      });
-
-
-      draggableImg.forEach(img => {
-    img.addEventListener('dragstart', function(event) {
-        event.dataTransfer.setData('text/plain', ''); // Erforderlich für das Drag & Drop
-        console.log("mösenbrock")
-    });
-
-    img.addEventListener('drop', function(event) {
-        event.preventDefault();
-      
-        const rect = canvas.getBoundingClientRect();
-        const x = event.clientX - rect.left - img.width / 2; // Die Hälfte der Bildbreite abziehen, um das Zentrum zu erhalten
-        const y = event.clientY - rect.top - img.height / 2; // Die Hälfte der Bildhöhe abziehen, um das Zentrum zu erhalten
-
-        const newImg = new Image();
-        newImg.src = img.src;
-
-        newImg.onload = function() {
-            ctx.drawImage(newImg, x, y);
-            console.log("Bild gemalt");
-            images.push({ x, y, img: newImg }); // Bild und Position dem Array hinzufügen
-        };
-    });
-});
-
-
-    canvas.addEventListener('click', function(event) {
-      const rect = canvas.getBoundingClientRect();
-      const clickX = event.clientX - rect.left;
-      const clickY = event.clientY - rect.top;
-
-      // Überprüfen, ob das Klick auf ein Bild liegt
-      for (let i = images.length - 1; i >= 0; i--) {
-        const imgObj = images[i];
-        if (clickX >= imgObj.x && clickX <= imgObj.x + imgObj.img.width &&
-            clickY >= imgObj.y && clickY <= imgObj.y + imgObj.img.height) {
-          images.splice(i, 1);
-          redrawCanvas();
-          break;
-        }
-      }
-    });
-
-
-    function redrawCanvas() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      images.forEach(imgObj => {
-        ctx.drawImage(imgObj.img, imgObj.x, imgObj.y);
-      });
-    }
 
 
 
