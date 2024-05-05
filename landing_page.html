@@ -22,7 +22,6 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-    <script src="https://unpkg.com/konva@9.3.6/konva.min.js"></script>
   </head>
   <body class="root">
     <audio id="soundFX">
@@ -43,9 +42,9 @@
         <canvas id="map" width="1400" height="850" class="map-img"></canvas>
       </div>
       <div class="sidebar">
-        <img src="./8541853_home_icon (1).png" alt="Image 1" class="draggable" draggable="true" id="pic">
-        <img src="./icons8-zeche-zollverein-80.png" alt="Image 2" class="draggable" draggable="true" id="pic">
-        <img src="./icons8-mine-64.png" alt="Image 3" class="draggable" draggable="true" id="pic">
+        <img src="./8541853_home_icon (1).png" alt="Haus 1" class="pic-home" data-typ="haus1">
+        <img src="./icons8-zeche-zollverein-80.png" alt="Haus 2" class="pic-home" data-typ="haus2">
+        <img src="./3671695_factory_icon.png"alt="Haus 3" class="pic-home" data-typ="haus3">
     
       </div>
       <div class="data">
@@ -190,15 +189,29 @@ Die Krupp-Gruppe, ein führender deutscher Stahl- und Rüstungshersteller, errei
         return new Promise((resolve) => setTimeout(resolve, milliseconds));
       }
 
-
-
-
       function placeObject(x, y, object) {
-        var posX = x * map_width;
-        var posY = y * map_height;
+        var posX = x 
+        var posY = y
 
         var object_img = new Image();
         object_img.src = object;
+
+        switch(object){
+          case "./icons8-zuhause-50.png":
+              housing_count++;
+              if(!housing_count == 0){move()}
+              console.log(housing_count)
+              document.getElementById("count_inhabitants").innerHTML = (housing_count == 0 ? " ": housing_count* 15000 + " Einwohner ");
+              break;
+            case "./icons8-zeche-zollverein-80.png":
+                zeche_count++;
+                document.getElementById("coal-value").innerHTML = zeche_count > 0 ? (zeche_count * 21000 + " t Kohle"): " "
+                break;
+            case "./3671695_factory_icon.png":
+              factory_count++;
+                document.getElementById("steel-value").innerHTML = (factory_count == 0 ? " ": factory_count *20000  + " t Eisen")
+                document.getElementById("factories").innerHTML = factory_count == 1 ? (factory_count + " Firma") : (factory_count > 0 ? (factory_count + " Firmen"): "")
+        }
 
         object_img.onload = function () {
           var object_width = 35;
@@ -213,6 +226,64 @@ Die Krupp-Gruppe, ein führender deutscher Stahl- und Rüstungshersteller, errei
           );
         };
       }
+        // Variable zum Speichern des ausgewählten Haus-Typs
+        var ausgewaehlterHausTyp = "";
+
+        // Funktion, die aufgerufen wird, wenn auf ein Bild eines Haus-Typs geklickt wird
+        function bildKlick(event) {
+            // Den ausgewählten Haus-Typ speichern
+            ausgewaehlterHausTyp = event.target.dataset.typ;
+            
+            // Feedback für den ausgewählten Haus-Typ anzeigen (zum Beispiel durch Hervorheben des ausgewählten Bildes)
+            console.log("Ausgewählter Haus-Typ: " + ausgewaehlterHausTyp);
+        }
+
+        // Das Canvas-Element auswählen
+        var canvasElement = document.getElementById("map");
+
+        // Eventlistener hinzufügen, um auf Klicks auf die Haus-Bilder zu reagieren
+        document.querySelectorAll('.pic-home').forEach(function(bild) {
+            bild.addEventListener('click', bildKlick);
+        });
+
+        // Funktion, die aufgerufen wird, wenn auf das Canvas-Element geklickt wird
+function platzierenHaus(event) {
+    // Mauskoordinaten innerhalb des Canvas-Elements erhalten
+    var rechteck = canvasElement.getBoundingClientRect();
+    var x = event.clientX - rechteck.left;
+    var y = event.clientY - rechteck.top;
+    
+    // Wenn kein Haus-Typ ausgewählt wurde, nichts tun
+    if (!ausgewaehlterHausTyp) {
+        console.log("Bitte wähle zuerst einen Haus-Typ aus.");
+        return;
+    }
+    
+    // Aktualisiere den Bildpfad entsprechend dem ausgewählten Haus-Typ
+    switch (ausgewaehlterHausTyp) {
+        case "haus1":
+            ausgewaehlterHausTyp = "./icons8-zuhause-50.png";
+            break;
+       case "haus2":
+            ausgewaehlterHausTyp = "./icons8-zeche-zollverein-80.png"
+            break
+       case "haus3":
+            ausgewaehlterHausTyp = "./3671695_factory_icon.png";
+            break;
+    }
+
+    
+    // Hier kannst du die Koordinaten und den ausgewählten Haus-Typ verwenden, um das Haus zu platzieren
+    x = Math.max(0, Math.min(canvasElement.width, x));
+    y = Math.max(0, Math.min(canvasElement.height, y));
+    console.log(x, y, ausgewaehlterHausTyp);
+    placeObject(x, y, ausgewaehlterHausTyp);
+    return 0;
+  }
+
+
+        // Eventlistener hinzufügen, um auf Klicks auf das Canvas-Element zu reagieren
+        canvasElement.addEventListener('click', platzierenHaus);
 
       async function showPopup(id, given_class) {
         var popup = document.getElementById(id);
@@ -220,12 +291,11 @@ Die Krupp-Gruppe, ein führender deutscher Stahl- und Rüstungshersteller, errei
         popup.classList.toggle("show-popup");
         document.getElementById("soundFX").play()
         console.log(popup.classList);
-        await Sleep(1800);
+        await Sleep(18000);
         popup.classList.remove("show-popup");
         popup.classList.toggle(given_class);
       }
-
-
+  
       function move() {
         if (i == 0) {
           i = 1;
@@ -236,7 +306,7 @@ Die Krupp-Gruppe, ein führender deutscher Stahl- und Rüstungshersteller, errei
 
           elem.innerHTML = startDate.toLocaleDateString();
 
-          var id = setInterval(frame, 600);
+          var id = setInterval(frame, 6000);
 
           function frame() {
             if (currentDate >= endDate) {
@@ -276,88 +346,11 @@ Die Krupp-Gruppe, ein führender deutscher Stahl- und Rüstungshersteller, errei
           }
         }
       }
-
-      function changeCoal(x_coordinate, y_coordinate) {
-        document.getElementById("coal-value").innerHTML = zeche_count > 0 ? (zeche_count * 21000 + " t Kohle"): " ";
-      }
-
-      function changeIron() {
-        document.getElementById("steel-value").innerHTML =  factory_count > 0 ? (factory_count * 2000 + " t Stahl"): " ";
-      }
-
-
-      function changeInhabitants() {
-        console.log(housing_count)
-        document.getElementById("count_inhabitants").innerHTML = 
-        (housing_count == 0 ? " ": housing_count* 15000 + " Einwohner ");
-      }
-
-      fetch("./first-page.json")
-        .then((response) => response.json())
-        .then((data) => {
-          let buildingNames = Object.keys(data);
-
-          let buildingCount = buildingNames.length;
-          if (buildingCount == 0) {;
-          } else {
-            move();
-          }
-
-          for (let i = 0; i < buildingCount; i++) {
-            let currentBuildingName = buildingNames[i];
-            let building = data[currentBuildingName];
-
-            let buildingType = building["type"];
-
-            switch (buildingType) {
-              case "Haus":
-                placeType = "./icons8-zuhause-50.png";
-                document.getElementById("count_inhabitants").innerHTML = (data.counter.Haeuser == 0 ? " ": data.counter.Haeuser* 15000 + " Einwohner ");
-                
-                break;
-              case "Fabrik":
-                factory_count = data.counter.Fabrik
-                ironSum += 
-                placeType = "./3671695_factory_icon.png";
-                document.getElementById("steel-value").innerHTML = (data.counter.Fabriken == 0 ? " ": data.counter.Fabriken * ironArray[building["x-Coordinate"]][building["y-Coordinate"]]  + " t Eisen")
-                document.getElementById("factories").innerHTML = factory_count == 1 ? (factory_count + " Firma") : (factory_count > 0 ? (factory_count + " Firmen"): "")
-                break;
-              case "Farm":
-                placeType = "./icons8-bauernhof-100.png";
-                document.getElementById("farm").innerHTML = data.counter.Farm == 1 ? (data.counter.Farm + " Bauernhof") : (data.counter.Farm > 0 ? (data.counter.Farm + " Bauernhöfe"): "")
-                break;
-              case "Zeche":
-                console.log(coalArray[building["x-Coordinate"]][building["y-Coordinate"]])
-                coalSum += 1000 * (coalArray[building["x-Coordinate"]][building["y-Coordinate"]] / 100)
-                placeType = "./icons8-zeche-zollverein-80.png";
-                document.getElementById("coal-value").innerHTML = data.counter.Zechen > 0 ? (coalSum + " t Kohle"): " ";
-                document.getElementById("zeche").innerHTML = data.counter.Zechen == 1 ? (data.counter.Zechen + "Zeche"): (data.counter.Zechen > 0 ? (data.counter.Zechen +  " Zechen"): " ");
-                break;
-            }
-
-            placeObject(
-              building["x-Coordinate"],
-              building["y-Coordinate"],
-              placeType
-            );
-            
-          }
-        }
-        );
+    }
 
       window.addEventListener("DOMContentLoaded", (event) => {
         var canvas = document.getElementById("map");
         var context = canvas.getContext("2d");
-
-        function setCanvasSize() {
-          var container = canvas.parentNode;
-          canvas.width = container.offsetWidth;
-          canvas.height = container.offsetHeight;
-        }
-        setCanvasSize();
-
-        window.addEventListener("resize", setCanvasSize);
       });
-    };
   </script>
 </html>

@@ -26,6 +26,11 @@
     padding-top: 5px;
 }
 
+.pic-home{
+    width: 40px;
+    height: 40px;
+}
+
 #pic{
     width: 40px;
     height: 40px;
@@ -68,10 +73,7 @@
 }
 
 
-.map-img {
-    border-radius: 10px;
-    max-width: 100%; /* Hinzugefügt, um das Bild responsiv zu machen */
-}
+
 
 .objects-first,
 .objects-second,
@@ -127,10 +129,6 @@
 
 @media screen and (min-width: 768px) {
     /* Füge hier zusätzliche CSS-Regeln für größere Bildschirme hinzu */
-    .content {
-        flex-direction: row; /* Ändere die Richtung auf Reihe */
-        align-items: center; /* Zentriere vertikal */
-    }
     
     .objects-first,
     .objects-second,
